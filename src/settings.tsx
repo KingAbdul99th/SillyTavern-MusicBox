@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { getExtensionSettings, setExtensionSettings } from "./extensionSettings.js";
-
+import MusicPlayer from "./musicPlayer.js";
 
 function toggleRemoveExtrasFromExtensionsBlock(removeExtras: boolean) {
   const extensionsBlock = document.getElementById("rm_extensions_block");
@@ -58,6 +58,7 @@ export default function Settings() {
             <label htmlFor="music-box-remove-extras">Remove Extras Block</label>
           </div>
           <hr className="sysHR" />
+          <MusicPlayer audioUrl={"https://www.soundhelix.com/examples/mp3/SoundHelix-Song-9.mp3"} />
         </div>
       </div>
     </>
