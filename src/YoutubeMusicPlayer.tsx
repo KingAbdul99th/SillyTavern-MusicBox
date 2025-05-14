@@ -1,6 +1,6 @@
 // src/YouTubeMusicPlayer.tsx
 import React, { useState, useCallback } from 'react';
-import YouTube, { YouTubePlayer, YouTubeProps } from 'react-youtube';
+import YouTube, { YouTubeEvent, YouTubePlayer, YouTubeProps } from 'react-youtube';
 
 interface YouTubeMusicPlayerProps {
   videoId: string; // The ID of the YouTube music video
@@ -40,6 +40,10 @@ const YouTubeMusicPlayer: React.FC<YouTubeMusicPlayerProps> = ({ videoId }) => {
     player?.seekTo(seconds, true);
   }, [player]);
 
+  const onError = (err: YouTubeEvent<number>) => {
+    console.log(err);
+  };
+  
   const handleVolumeChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
     const newVolume = parseInt(event.target.value, 10);
     setVolume(newVolume);
@@ -87,6 +91,7 @@ const YouTubeMusicPlayer: React.FC<YouTubeMusicPlayerProps> = ({ videoId }) => {
         }}
         onReady={onReady}
         onStateChange={onStateChange}
+        onError={onError}
       />
 
       <div className="controls">
