@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { getExtensionSettings, setExtensionSettings } from "./extensionSettings.js";
-import MusicPlayer from "./musicPlayer.js";
+import { getExtensionSettings, setExtensionSettings } from "./ExtensionSettings.js";
+import MusicPlayer from "./MusicPlayer.js";
+import YouTubeMusicPlayer from "./YoutubeMusicPlayer.js";
 
 function toggleRemoveExtrasFromExtensionsBlock(removeExtras: boolean) {
   const extensionsBlock = document.getElementById("rm_extensions_block");
@@ -23,7 +24,8 @@ export default function Settings() {
   let extensionSettings = getExtensionSettings();
   const [enabled, setEnabled] = useState(extensionSettings.enabled);
   const [removeExtras, setRemoveExtras] = useState(extensionSettings.removeExtras);
-
+  const [musicVideoId, setMusicVideoId] = useState('dQw4w9WgXcQ');
+  
   if(enabled) {
     toggleRemoveExtrasFromExtensionsBlock(extensionSettings.removeExtras);
   }
@@ -59,6 +61,7 @@ export default function Settings() {
           </div>
           <hr className="sysHR" />
           <MusicPlayer audioUrl={"https://www.soundhelix.com/examples/mp3/SoundHelix-Song-9.mp3"} />
+          <YouTubeMusicPlayer videoId={musicVideoId} />
         </div>
       </div>
     </>
