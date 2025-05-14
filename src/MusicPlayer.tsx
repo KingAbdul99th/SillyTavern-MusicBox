@@ -132,8 +132,10 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ videoId }) => {
             style={styles.slider}
             aria-label="Time"
           />
-          <div style={styles.timeDisplayLeft}>{formatTime(currentTime)}</div>
-          <div style={styles.timeDisplayRight}>{formatTime(duration)}</div>
+          <div style={styles.timeDisplay}>
+            <span>{formatTime(currentTime)}</span>
+            <span style={{textAlign: "right"}}>{formatTime(duration)}</span>
+          </div>
         </div>
         <div style={styles.volumeContainer}>
           <button
@@ -219,17 +221,10 @@ const styles = {
   slider: {
     width: "100%"
   },
-  timeDisplayLeft: {
+  timeDisplay: {
     fontSize: "0.75rem",
     color: "#6b7280",
     marginTop: "0.25rem"
-  },
-  timeDisplayRight: {
-    fontSize: "0.75rem",
-    color: "#6b7280",
-    marginTop: "0.25rem",
-    marginLeft: "auto",
-    marginRight: "0"
   },
   volumeContainer: {
     display: "flex",
