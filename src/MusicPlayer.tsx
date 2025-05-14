@@ -97,7 +97,7 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ videoId }) => {
           height: "0", // Set to 0 to hide the video visually, we only want audio
           width: "0",
           playerVars: {
-            autoplay: 1, // Or 0 if you prefer to start paused
+            autoplay: 0, // Or 0 if you prefer to start paused
             controls: 0, // Hide default controls
             disablekb: 1, // Disable keyboard controls
             showinfo: 0, // Hide video title
