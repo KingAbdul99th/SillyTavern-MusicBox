@@ -123,7 +123,6 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ videoId }) => {
           )}
         </button>
         <div style={styles.timeSlider}>
-          <div style={styles.timeDisplay}>{formatTime(currentTime)}</div>
           <input
             type="range"
             min="0"
@@ -133,7 +132,8 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ videoId }) => {
             style={styles.slider}
             aria-label="Time"
           />
-          <div style={styles.timeDisplay}>{formatTime(duration)}</div>
+          <div style={styles.timeDisplayLeft}>{formatTime(currentTime)}</div>
+          <div style={styles.timeDisplayRight}>{formatTime(duration)}</div>
         </div>
         <div style={styles.volumeContainer}>
           <button
@@ -169,23 +169,23 @@ const styles = {
     flexDirection: "column",
     alignItems: "center",
     padding: "20px",
-    backgroundColor: "#f3f4f6", // bg-gray-100
-    border: "1px solid #d1d5db", // border-gray-300
-    borderRadius: "0.5rem", // rounded-lg
+    backgroundColor: "#f3f4f6",
+    border: "1px solid #d1d5db",
+    borderRadius: "0.5rem",
     boxShadow:
-      "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)", // shadow-md
-    width: "32rem" // max-w-md
+      "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)",
+    width: "32rem"
   },
   controls: {
     display: "flex",
     alignItems: "center",
     width: "100%",
-    marginTop: "1rem", // mt-4
+    marginTop: "1rem",
     gap: "1rem"
   },
   playPauseButton: {
-    width: "3rem", // w-12
-    height: "3rem", // h-12
+    width: "3rem",
+    height: "3rem",
     borderRadius: "9999px", // rounded-full
     border: "1px solid #d1d5db",
     backgroundColor: "white",
@@ -196,8 +196,8 @@ const styles = {
     padding: 0
   },
   muteButton: {
-    width: "2.5rem", // w-10
-    height: "2.5rem", // h-10
+    width: "2.5rem",
+    height: "2.5rem",
     borderRadius: "9999px", // rounded-full
     border: "none",
     backgroundColor: "transparent",
@@ -208,21 +208,28 @@ const styles = {
     padding: 0
   },
   icon: {
-    width: "1.5rem", // w-6
-    height: "1.5rem", // h-6
+    width: "1.5rem",
+    height: "1.5rem",
     color: "#4b5563"
   },
   timeSlider: {
     flex: "1",
-    marginRight: "1rem" // mr-4
+    marginRight: "1rem"
   },
   slider: {
     width: "100%"
   },
-  timeDisplay: {
-    fontSize: "0.75rem", // text-xs
-    color: "#6b7280", // text-gray-500
-    marginTop: "0.25rem" // mt-1
+  timeDisplayLeft: {
+    fontSize: "0.75rem",
+    color: "#6b7280",
+    marginTop: "0.25rem"
+  },
+  timeDisplayRight: {
+    fontSize: "0.75rem",
+    color: "#6b7280",
+    marginTop: "0.25rem",
+    marginLeft: "auto",
+    marginRight: "0"
   },
   volumeContainer: {
     display: "flex",
@@ -230,7 +237,7 @@ const styles = {
     gap: "0.5rem"
   },
   volumeSlider: {
-    width: "10rem" // w-40
+    width: "10rem"
   }
 };
 
