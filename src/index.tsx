@@ -1,47 +1,46 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { getContext } from "@ST/scripts/extensions.js";
 import Profile from "./Settings";
-import { createRoot } from 'react-dom/client';
+import { createRoot } from "react-dom/client";
 import React from "react";
-import './styles/main.scss'; 
+import "./styles/main.scss";
 
 // declare var SillyTavern: any;
 export const globalContext = getContext();
 
 function createSlashCommands() {
-    const SlashCommandParser = globalContext.SlashCommandParser;
-    const SlashCommand = globalContext.SlashCommand;
-    const SlashCommandNamedArgument = globalContext.SlashCommandNamedArgument;
-    const SlashCommandArgument = globalContext.SlashCommandArgument;
-    const ARGUMENT_TYPE = globalContext.ARGUMENT_TYPE;
+  const SlashCommandParser = globalContext.SlashCommandParser;
+  const SlashCommand = globalContext.SlashCommand;
+  const SlashCommandNamedArgument = globalContext.SlashCommandNamedArgument;
+  const SlashCommandArgument = globalContext.SlashCommandArgument;
+  const ARGUMENT_TYPE = globalContext.ARGUMENT_TYPE;
 
-    SlashCommandParser.addCommandObject(
-        SlashCommand.fromProps(
-            {
-                name: "music-box-command",
-                callback: (namedArgs: any, unnamedArgs: any) => {
-                    return Array(namedArgs.times ?? 5)
-                        .fill(unnamedArgs.toString())
-                        .join(' ');
-                },
-                aliases: ["example-hack-command"],
-                returns: 'the repeated text',
-                namedArgumentList: [
-                    SlashCommandNamedArgument.fromProps({
-                        name: "times",
-                        description: "number of times to repeat the text",
-                        typeLisst: ARGUMENT_TYPE.NUMBER,
-                        defaultValue: '5',
-                    }),
-                ],
-                unnamedArgumentList: [
-                    SlashCommandArgument.fromProps({
-                        description: "the text to repeat",
-                        typeList: ARGUMENT_TYPE.STRING,
-                        isRequired: true,
-                    }),
-                ],
-                helpSString: `
+  SlashCommandParser.addCommandObject(
+    SlashCommand.fromProps({
+      name: "music-box-command",
+      callback: (namedArgs: any, unnamedArgs: any) => {
+        return Array(namedArgs.times ?? 5)
+          .fill(unnamedArgs.toString())
+          .join(" ");
+      },
+      aliases: ["example-hack-command"],
+      returns: "the repeated text",
+      namedArgumentList: [
+        SlashCommandNamedArgument.fromProps({
+          name: "times",
+          description: "number of times to repeat the text",
+          typeLisst: ARGUMENT_TYPE.NUMBER,
+          defaultValue: "5"
+        })
+      ],
+      unnamedArgumentList: [
+        SlashCommandArgument.fromProps({
+          description: "the text to repeat",
+          typeList: ARGUMENT_TYPE.STRING,
+          isRequired: true
+        })
+      ],
+      helpSString: `
                     <div>
                         Repeats the provided text a number of times.
                     </div>
@@ -59,35 +58,34 @@ function createSlashCommands() {
                         </ul>
                     </div>
                 `
-            }
-        )
-    );
+    })
+  );
 }
 
 function attachReactElement() {
-    // Choose the root container for the extension's main UI
-    const rootContainer = document.getElementById("extensions_settings");
+  // Choose the root container for the extension's main UI
+  const rootContainer = document.getElementById("extensions_settings");
 
-    if(rootContainer) {
-        const rootElement = document.createElement('div');
-        rootContainer.appendChild(rootElement);
-        rootElement.className = "extension_container";
-        rootElement.id = "music-box_extension_container";
-        const root = createRoot(rootElement);
+  if (rootContainer) {
+    const rootElement = document.createElement("div");
+    rootContainer.appendChild(rootElement);
+    rootElement.className = "extension_container";
+    rootElement.id = "music-box_extension_container";
+    const root = createRoot(rootElement);
 
-        root.render(
-            <React.StrictMode>
-                <Profile />
-            </React.StrictMode>
-        );    
-    }
+    root.render(
+      <React.StrictMode>
+        <Profile />
+      </React.StrictMode>
+    );
+  }
 }
 
 function main() {
-    console.log("[music-box] Initialization Started");
-    createSlashCommands();
-    attachReactElement();
-    console.log("[music-box] Initialization Finished");
+  console.log("[music-box] Initialization Started");
+  createSlashCommands();
+  attachReactElement();
+  console.log("[music-box] Initialization Finished");
 }
 
 main();

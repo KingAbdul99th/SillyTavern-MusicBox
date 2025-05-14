@@ -1,15 +1,20 @@
 import React, { useState } from "react";
-import { getExtensionSettings, setExtensionSettings } from "./ExtensionSettings";
+import {
+  getExtensionSettings,
+  setExtensionSettings
+} from "./ExtensionSettings";
 import MusicPlayer from "./MusicPlayer";
-import YouTubeMusicPlayer from "./YoutubeMusicPlayer";
 
 export default function Settings() {
   let extensionSettings = getExtensionSettings();
   const [enabled, setEnabled] = useState(extensionSettings.enabled);
-  const [musicVideoId, setMusicVideoId] = useState('dQw4w9WgXcQ');
-  
+  const [musicVideoId, setMusicVideoId] = useState("dQw4w9WgXcQ");
+
   async function handleEnabledClick() {
-    extensionSettings = setExtensionSettings({...extensionSettings, enabled: !extensionSettings.enabled});
+    extensionSettings = setExtensionSettings({
+      ...extensionSettings,
+      enabled: !extensionSettings.enabled
+    });
     console.log("enable toggled ", extensionSettings.enabled);
     setEnabled(extensionSettings.enabled);
   }
@@ -23,12 +28,16 @@ export default function Settings() {
         </div>
         <div className="inline-drawer-content">
           <div className="music-box-block flex-container">
-            <input id="music-box-enable" type="checkbox" onClick={handleEnabledClick} checked={enabled}/>
+            <input
+              id="music-box-enable"
+              type="checkbox"
+              onClick={handleEnabledClick}
+              checked={enabled}
+            />
             <label htmlFor="music-box-enable">Enable music-box</label>
           </div>
           <hr className="sysHR" />
           <MusicPlayer videoId={musicVideoId} />
-          <YouTubeMusicPlayer videoId={musicVideoId} />
         </div>
       </div>
     </>

@@ -123,6 +123,7 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ videoId }) => {
           )}
         </button>
         <div style={styles.timeSlider}>
+          <div style={styles.timeDisplay}>{formatTime(currentTime)}</div>
           <input
             type="range"
             min="0"
@@ -132,9 +133,7 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ videoId }) => {
             style={styles.slider}
             aria-label="Time"
           />
-          <div style={styles.timeDisplay}>
-            {formatTime(duration)}
-          </div>
+          <div style={styles.timeDisplay}>{formatTime(duration)}</div>
         </div>
         <div style={styles.volumeContainer}>
           <button
