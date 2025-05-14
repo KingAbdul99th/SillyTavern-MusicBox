@@ -197,11 +197,11 @@ const styles = {
     padding: 0
   },
   muteButton: {
-    width: "2.5rem",
-    height: "2.5rem",
+    width: "3rem",
+    height: "3rem",
     borderRadius: "9999px", // rounded-full
-    border: "none",
-    backgroundColor: "transparent",
+    border: "1px solid #d1d5db",
+    backgroundColor: "white",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
