@@ -134,7 +134,7 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ videoId }) => {
           />
           <div style={styles.timeDisplay}>
             <span>{formatTime(currentTime)}</span>
-            <span style={{textAlign: "right"}}>{formatTime(duration)}</span>
+            <span style={{textAlign: "right", marginLeft: "auto"}}>{formatTime(duration)}</span>
           </div>
         </div>
         <div style={styles.volumeContainer}>
@@ -182,7 +182,6 @@ const styles = {
     display: "flex",
     alignItems: "center",
     width: "100%",
-    marginTop: "1rem",
     gap: "1rem"
   },
   playPauseButton: {
