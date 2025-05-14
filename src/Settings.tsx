@@ -27,7 +27,7 @@ export default function Settings() {
             <label htmlFor="music-box-enable">Enable music-box</label>
           </div>
           <hr className="sysHR" />
-          <MusicPlayer audioUrl={"https://www.soundhelix.com/examples/mp3/SoundHelix-Song-9.mp3"} />
+          <MusicPlayer videoId={musicVideoId} />
           <YouTubeMusicPlayer videoId={musicVideoId} />
         </div>
       </div>
