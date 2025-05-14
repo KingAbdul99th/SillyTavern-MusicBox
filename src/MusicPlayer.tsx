@@ -108,6 +108,7 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ videoId }) => {
         onReady={onReady}
         onStateChange={onStateChange}
         onError={onError}
+        style={{display: "none"}}
       />
 
       <div style={styles.controls}>
