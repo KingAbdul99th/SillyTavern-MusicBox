@@ -188,8 +188,8 @@ const styles = {
     width: "3rem",
     height: "3rem",
     borderRadius: "9999px", // rounded-full
-    border: "none",
-    backgroundColor: "transparent",
+    border: "1px solid #d1d5db",
+    backgroundColor: "white",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
@@ -200,8 +200,8 @@ const styles = {
     width: "3rem",
     height: "3rem",
     borderRadius: "9999px", // rounded-full
-    border: "1px solid #d1d5db",
-    backgroundColor: "white",
+    border: "none",
+    backgroundColor: "transparent",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
@@ -224,7 +224,7 @@ const styles = {
     display: "flex",
     fontSize: "0.75rem",
     color: "#6b7280",
-    marginTop: "0.25rem"
+    marginTop: "0.5rem"
   },
   volumeContainer: {
     display: "flex",
