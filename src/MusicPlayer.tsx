@@ -98,9 +98,9 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ videoId }) => {
           width: "0",
           playerVars: {
             autoplay: 0, // Or 0 if you prefer to start paused
-            controls: 0, // Hide default controls
+            controls: 1, // Hide default controls
             disablekb: 1, // Disable keyboard controls
-            showinfo: 0, // Hide video title
+            showinfo: 1, // Hide video title
             modestbranding: 1, // Show minimal YouTube branding
             rel: 0 // Prevent related videos from showing
           }
