@@ -3,7 +3,7 @@ import {
   getExtensionSettings,
   setExtensionSettings
 } from "./ExtensionSettings";
-import MusicPlayer from "./MusicPlayer";
+import MusicPlayer from "./components/MusicPlayer";
 
 export default function Settings() {
   let extensionSettings = getExtensionSettings();
