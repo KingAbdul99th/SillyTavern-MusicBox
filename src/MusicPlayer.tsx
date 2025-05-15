@@ -216,7 +216,6 @@ const styles = {
   },
   timeSlider: {
     flex: "1",
-    marginRight: "1rem"
   },
   slider: {
     width: "100%"
