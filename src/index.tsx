@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { getContext } from "@ST/scripts/extensions.js";
-import Profile from "./Settings";
+import Settings from "./Settings";
 import { createRoot } from "react-dom/client";
 import React from "react";
 import "./styles/main.scss";
@@ -75,7 +75,7 @@ function attachReactElement() {
 
     root.render(
       <React.StrictMode>
-        <Profile />
+        <Settings />
       </React.StrictMode>
     );
   }
