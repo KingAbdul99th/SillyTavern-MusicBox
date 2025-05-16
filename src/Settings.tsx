@@ -30,7 +30,7 @@ export default function Settings() {
         <div className="drawer-toggle drawer-header" onClick={handleDrawerOpenClick}>
           <div className="drawer-icon fa-solid fa-music fa-fw closedIcon sttt--enabled interactable"></div>
         </div>
-        <div className={"drawer-content" + (drawerOpen? "openDrawer": "closedDrawer")}>
+        <div className={"drawer-content " + (drawerOpen? "openDrawer": "closedDrawer")}>
           <div className="music-box-block flex-container">
             <input
               id="music-box-enable"
