@@ -9,8 +9,9 @@ export default function Settings() {
   let extensionSettings = getExtensionSettings();
   const [enabled, setEnabled] = useState(extensionSettings.enabled);
   const [musicVideoId, setMusicVideoId] = useState("dQw4w9WgXcQ");
+  const [drawerOpen, setDrawerOpen] = useState(false);
 
-  async function handleEnabledClick() {
+  function handleEnabledClick() {
     extensionSettings = setExtensionSettings({
       ...extensionSettings,
       enabled: !extensionSettings.enabled
@@ -19,13 +20,17 @@ export default function Settings() {
     setEnabled(extensionSettings.enabled);
   }
 
+  function handleDrawerOpenClick() {
+    setDrawerOpen(!drawerOpen);
+  }
+
   return (
     <>
       <div className="drawer">
-        <div className="drawer-toggle drawer-header">
+        <div className="drawer-toggle drawer-header" onClick={handleDrawerOpenClick}>
           <div className="drawer-icon fa-solid fa-music fa-fw closedIcon sttt--enabled interactable"></div>
         </div>
-        <div className="drawer-content closedDrawer">
+        <div className={"drawer-content" + (drawerOpen? "openDrawer": "closedDrawer")}>
           <div className="music-box-block flex-container">
             <input
               id="music-box-enable"
