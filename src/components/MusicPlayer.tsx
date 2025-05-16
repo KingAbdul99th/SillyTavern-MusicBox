@@ -171,7 +171,7 @@ const styles = {
     flexDirection: "column",
     alignItems: "center",
     padding: "20px",
-    backgroundColor: "#f3f4f6",
+    backgroundColor: "#transparent",
     border: "1px solid #d1d5db",
     borderRadius: "0.5rem",
     boxShadow:
@@ -189,7 +189,7 @@ const styles = {
     height: "3rem",
     borderRadius: "9999px", // rounded-full
     border: "1px solid #d1d5db",
-    backgroundColor: "white",
+    backgroundColor: "transparent",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
