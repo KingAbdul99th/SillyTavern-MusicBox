@@ -217,7 +217,7 @@ const styles = {
   timeSlider: {
     flex: "1",
     AlignCenter,
-    paddingTop: "1.3rem"
+    paddingTop: "2rem"
   },
   slider: {
     width: "100%"
