@@ -4,6 +4,9 @@ import {
   setExtensionSettings
 } from "./ExtensionSettings";
 import MusicPlayer from "./components/MusicPlayer";
+import { PlaylistManager } from "./components/PlaylistManager";
+import { defaultPlaylist } from "./models/Playlist";
+
 
 export default function Settings() {
   let extensionSettings = getExtensionSettings();
@@ -47,6 +50,7 @@ export default function Settings() {
           <hr className="sysHR" />          
           <input type="text" className="text_pole" placeholder="videoId" value={musicVideoId} onChange={onVideoIdChange}/>
           <MusicPlayer videoId={musicVideoId} />
+          <PlaylistManager playlists={[defaultPlaylist]} selectedPlaylist={defaultPlaylist.name}/>
         </div>
       </div>
     </>
