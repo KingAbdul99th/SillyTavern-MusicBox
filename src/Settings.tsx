@@ -8,7 +8,7 @@ import MusicPlayer from "./components/MusicPlayer";
 export default function Settings() {
   let extensionSettings = getExtensionSettings();
   const [enabled, setEnabled] = useState(extensionSettings.enabled);
-  const [musicVideoId, setMusicVideoId] = useState("dQw4w9WgXcQ");
+  const [musicVideoId, setMusicVideoId] = useState("Jlv2NxO0qVU");
   const [drawerOpen, setDrawerOpen] = useState(false);
 
   function handleEnabledClick() {
@@ -22,6 +22,10 @@ export default function Settings() {
 
   function handleDrawerOpenClick() {
     setDrawerOpen(!drawerOpen);
+  }
+  const onVideoIdChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+      const newVideoId = event.target.value;
+      setMusicVideoId(newVideoId);
   }
 
   return (
@@ -40,7 +44,8 @@ export default function Settings() {
             />
             <label htmlFor="music-box-enable">Enable music-box</label>
           </div>
-          <hr className="sysHR" />
+          <hr className="sysHR" />          
+          <input type="text" className="text_pole" placeholder="videoId" value={musicVideoId} onChange={onVideoIdChange}/>
           <MusicPlayer videoId={musicVideoId} />
         </div>
       </div>

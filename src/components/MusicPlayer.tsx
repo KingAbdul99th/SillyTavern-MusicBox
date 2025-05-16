@@ -110,7 +110,6 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ videoId }) => {
         onError={onError}
         style={{display: "none"}}
       />
-      <input type="text" className="text_pole" placeholder="videoId" />
       <div style={styles.controls}>
         <button
           onClick={isPlaying ? onPause : onPlay}
@@ -217,7 +216,7 @@ const styles = {
   timeSlider: {
     flex: "1",
     AlignCenter,
-    paddingTop: "2rem"
+    paddingTop: "1.1rem"
   },
   slider: {
     width: "100%"
