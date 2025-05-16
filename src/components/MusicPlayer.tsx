@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from "react";
-import { Play, Pause, Volume2, VolumeX } from "lucide-react";
+import { Play, Pause, Volume2, VolumeX, AlignCenter } from "lucide-react";
 import YouTube, {
   YouTubeEvent,
   YouTubePlayer,
@@ -110,7 +110,7 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ videoId }) => {
         onError={onError}
         style={{display: "none"}}
       />
-
+      <input type="text" className="text_pole" placeholder="videoId" />
       <div style={styles.controls}>
         <button
           onClick={isPlaying ? onPause : onPlay}
@@ -183,7 +183,7 @@ const styles = {
     display: "flex",
     alignItems: "center",
     width: "100%",
-    gap: "1rem"
+    gap: "1rem",
   },
   playPauseButton: {
     width: "3rem",
@@ -216,6 +216,8 @@ const styles = {
   },
   timeSlider: {
     flex: "1",
+    AlignCenter,
+    paddingTop: "1.3rem"
   },
   slider: {
     width: "100%"
