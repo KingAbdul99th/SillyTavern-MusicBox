@@ -22,11 +22,11 @@ export default function Settings() {
   return (
     <>
       <div className="inline-drawer">
-        <div className="inline-drawer-toggle inline-drawer-header">
+        <div className="drawer-toggledrawer-header">
           <b>{extensionSettings.name}</b>
           <div className="inline-drawer-icon fa-solid fa-circle-chevron-down down"></div>
         </div>
-        <div className="inline-drawer-content">
+        <div className="drawer-content">
           <div className="music-box-block flex-container">
             <input
               id="music-box-enable"

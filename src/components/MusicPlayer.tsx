@@ -15,7 +15,7 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ videoId }) => {
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
   const [currentTime, setCurrentTime] = useState<number>(0);
   const [duration, setDuration] = useState<number>(0);
-  const [volume, setVolume] = useState<number>(1); // Default volume is 1 (full)
+  const [volume, setVolume] = useState<number>(100); // Default volume is 1 (full)
   const [isMuted, setIsMuted] = useState<boolean>(false);
 
   const onReady: YouTubeProps["onReady"] = (event) => {
@@ -54,7 +54,7 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ videoId }) => {
 
   const handleVolumeChange = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
-      const newVolume = parseInt(event.target.value, 10);
+      const newVolume = parseFloat(event.target.value);
       setVolume(newVolume);
       player?.setVolume(newVolume);
     },
@@ -138,26 +138,26 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ videoId }) => {
             <span style={{textAlign: "right", marginLeft: "auto"}}>{formatTime(duration)}</span>
           </div>
         </div>
+        <button
+          onClick={toggleMute}
+          style={styles.muteButton}
+          aria-label={isMuted ? "Unmute" : "Mute"}
+        >
+          {isMuted || volume === 0 ? (
+            <VolumeX style={styles.icon} />
+          ) : (
+            <Volume2 style={styles.icon} />
+          )}
+        </button>
         <div style={styles.volumeContainer}>
-          <button
-            onClick={toggleMute}
-            style={styles.muteButton}
-            aria-label={isMuted ? "Unmute" : "Mute"}
-          >
-            {isMuted || volume === 0 ? (
-              <VolumeX style={styles.icon} />
-            ) : (
-              <Volume2 style={styles.icon} />
-            )}
-          </button>
           <input
             type="range"
             min="0"
-            max="1"
-            step="0.01"
+            max="100"
+            step="1"
             value={volume}
             onChange={handleVolumeChange}
-            style={styles.volumeSlider}
+            style={styles.slider}
             aria-label="Volume"
           />
         </div>

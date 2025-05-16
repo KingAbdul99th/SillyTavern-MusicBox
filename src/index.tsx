@@ -64,13 +64,13 @@ function createSlashCommands() {
 
 function attachReactElement() {
   // Choose the root container for the extension's main UI
-  const rootContainer = document.getElementById("extensions_settings");
+  const rootContainer = document.getElementById("top-settings-holder");
 
   if (rootContainer) {
     const rootElement = document.createElement("div");
     rootContainer.appendChild(rootElement);
-    rootElement.className = "extension_container";
-    rootElement.id = "music-box_extension_container";
+    rootElement.className = "drawer";
+    rootElement.id = "music-box-extension-container";
     const root = createRoot(rootElement);
 
     root.render(
@@ -83,8 +83,8 @@ function attachReactElement() {
 
 function main() {
   console.log("[music-box] Initialization Started");
-  createSlashCommands();
   attachReactElement();
+  createSlashCommands();
   console.log("[music-box] Initialization Finished");
 }
 
