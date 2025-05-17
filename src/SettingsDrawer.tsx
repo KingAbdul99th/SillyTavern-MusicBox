@@ -2,8 +2,9 @@ import React, { useContext, useState } from "react";
 import MusicPlayer from "./components/MusicPlayer";
 import { PlaylistManager } from "./components/PlaylistManager";
 import { defaultPlaylist } from "./models/Playlist";
-import { Callback, EventEmitterContext } from "./EventEmitter";
+import { Callback } from "./EventEmitter";
 import { defaultExtensionSettings, IExtenstionSettings } from "./models/ExtensionSettings";
+import { EventEmitterContext } from "./index";
 
 export default function SettingsDrawer() {
   const eventEmitterContext = useContext(

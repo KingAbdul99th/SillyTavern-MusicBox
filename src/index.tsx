@@ -4,12 +4,15 @@ import SettingsDrawer from "./SettingsDrawer";
 import { createRoot } from "react-dom/client";
 import React from "react";
 import "./styles/main.scss";
-import { EventEmitterContext } from "./EventEmitter";
+import { EventEmitter } from "./EventEmitter";
 
 // declare var SillyTavern: any;
 export const globalContext = getContext();
 
-function attachReactElement() {
+// MusicBox context
+export const EventEmitterContext = React.createContext(new EventEmitter());
+
+function attachReactElement() {  
   const eventEmitterContext = React.useContext(EventEmitterContext);
   // Choose the root container for the extension's main UI
   const rootContainer = document.getElementById("top-settings-holder");

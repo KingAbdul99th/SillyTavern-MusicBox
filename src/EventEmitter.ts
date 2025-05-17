@@ -1,5 +1,3 @@
-import React from "react";
-
 export type Callback = (eventData: unknown) => void;
 
 export class EventEmitter {
@@ -23,5 +21,3 @@ export class EventEmitter {
     }
   }
 }
-
-export const EventEmitterContext = React.createContext(new EventEmitter());
