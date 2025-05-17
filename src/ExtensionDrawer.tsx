@@ -1,35 +1,23 @@
 import React, { useState } from "react";
-import MusicPlayer from "./components/MusicPlayer";
-import { PlaylistManager } from "./components/PlaylistManager";
-import { defaultPlaylist } from "./models/Playlist";
 import { IExtenstionSettings } from "./models/ExtensionSettings";
+import { DrawerContent } from "./components/DrawerContent";
 
-interface SettingsDrawerProps {
+interface ExtensionDrawerProps {
   extensionSettings: IExtenstionSettings;
   setExtensionSettings: (newSettings: IExtenstionSettings) => void;
 }
 
-export const ExtensionDrawer: React.FC<SettingsDrawerProps> = ({extensionSettings, setExtensionSettings}) => {
-  const [musicVideoId, setMusicVideoId] = useState("Jlv2NxO0qVU");
+export const ExtensionDrawer: React.FC<ExtensionDrawerProps> = ({
+  extensionSettings,
+  setExtensionSettings
+}) => {
   const [drawerOpen, setDrawerOpen] = useState(false);
 
-  function handleEnabledClick() {
-    const newSettings = {
-      ...extensionSettings,
-      enabled: !extensionSettings.enabled
-    }
-    setExtensionSettings(newSettings);
-    console.log("enable toggled ", extensionSettings.enabled);
-  }
 
   function handleDrawerOpenClick() {
     setDrawerOpen(!drawerOpen);
   }
 
-  const onVideoIdChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const newVideoId = event.target.value;
-    setMusicVideoId(newVideoId);
-  };
 
   return (
     <>
@@ -46,31 +34,9 @@ export const ExtensionDrawer: React.FC<SettingsDrawerProps> = ({extensionSetting
           }
           style={{ display: drawerOpen ? "block" : "none" }}
         >
-          <div className="music-box-block flex-container">
-            <input
-              id="music-box-enable"
-              type="checkbox"
-              onClick={handleEnabledClick}
-              checked={extensionSettings.enabled}
-            />
-            <label htmlFor="music-box-enable">Enable music-box</label>
-          </div>
-          <hr className="sysHR" />
-          <input
-            type="text"
-            className="text_pole"
-            placeholder="videoId"
-            value={musicVideoId}
-            onChange={onVideoIdChange}
-          />
-          <MusicPlayer videoId={musicVideoId} />
-          <PlaylistManager
-            playlists={[defaultPlaylist]}
-            selectedPlaylist={defaultPlaylist.name}
-          />
+          <DrawerContent extensionSettings={extensionSettings} setExtensionSettings={setExtensionSettings}></DrawerContent>
         </div>
       </div>
     </>
   );
-
-}
+};

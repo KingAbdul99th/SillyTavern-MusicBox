@@ -24,3 +24,9 @@
 //     @extend header;
 //     background: blue;
 // }
+
+.flex-container {
+    display: flex;
+    gap: 5px;
+    flex-wrap: wrap;
+}
