@@ -54,7 +54,7 @@ export const DrawerContent: React.FC<DrawerProps> = ({
           playlists={[defaultPlaylist]}
           selectedPlaylist={defaultPlaylist.name}
         />
-          <RiveComponent />
+          {/* <RiveComponent /> */}
       </div>
     </div>
   );
