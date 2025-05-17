@@ -1,4 +1,4 @@
-import { SettingsDrawer } from "./SettingsDrawer"
+import { ExtensionDrawer } from "./ExtensionDrawer"
 import { getSTExtensionSettings, setSTExtensionSettings } from "./ExtensionSettings";
 import { useEffect, useState } from "react";
 
@@ -11,6 +11,6 @@ export const ExtensionRoot = () => {
   }, [extensionSettings]);
 
     return (
-        <SettingsDrawer extensionSettings={extensionSettings} setExtensionSettings={setExtensionSettings}/>
+        <ExtensionDrawer extensionSettings={extensionSettings} setExtensionSettings={setExtensionSettings}/>
     )
 }

@@ -9,7 +9,7 @@ interface SettingsDrawerProps {
   setExtensionSettings: (newSettings: IExtenstionSettings) => void;
 }
 
-export const SettingsDrawer: React.FC<SettingsDrawerProps> = ({extensionSettings, setExtensionSettings}) => {
+export const ExtensionDrawer: React.FC<SettingsDrawerProps> = ({extensionSettings, setExtensionSettings}) => {
   const [musicVideoId, setMusicVideoId] = useState("Jlv2NxO0qVU");
   const [drawerOpen, setDrawerOpen] = useState(false);
 
