@@ -1,20 +1,22 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import MusicPlayer from "./components/MusicPlayer";
 import { PlaylistManager } from "./components/PlaylistManager";
 import { defaultPlaylist } from "./models/Playlist";
 import { Callback } from "./EventEmitter";
 import { defaultExtensionSettings, IExtenstionSettings } from "./models/ExtensionSettings";
-import { EventEmitterContext } from "./index";
+import { EventEmitter } from "./EventEmitter";
 
-export default function SettingsDrawer() {
-  const eventEmitterContext = useContext(
-    EventEmitterContext
-  );
+
+interface SettingsDrawerProps {
+  eventEmitter: EventEmitter;
+}
+
+export const SettingsDrawer: React.FC<SettingsDrawerProps> = ({eventEmitter}) => {
   let extensionSettings: IExtenstionSettings = defaultExtensionSettings;
   const extensionSettingsUpdated: Callback = (eventData: unknown) => {
     extensionSettings = eventData as IExtenstionSettings;
   }
-  eventEmitterContext.on("SETTINGS_UPDATE", extensionSettingsUpdated);
+  eventEmitter.on("SETTINGS_UPDATE", extensionSettingsUpdated);
   const [enabled, setEnabled] = useState(extensionSettings.enabled);
   const [musicVideoId, setMusicVideoId] = useState("Jlv2NxO0qVU");
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -24,7 +26,7 @@ export default function SettingsDrawer() {
       ...extensionSettings,
       enabled: !extensionSettings.enabled
     }
-    eventEmitterContext.emit("SETTINGS_UPDATE", newSettings)
+    eventEmitter.emit("SETTINGS_UPDATE", newSettings)
     console.log("enable toggled ", extensionSettings.enabled);
     setEnabled(extensionSettings.enabled);
   }
@@ -78,4 +80,5 @@ export default function SettingsDrawer() {
       </div>
     </>
   );
+
 }

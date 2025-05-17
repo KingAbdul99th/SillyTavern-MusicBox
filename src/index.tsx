@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { getContext } from "@ST/scripts/extensions.js";
-import SettingsDrawer from "./SettingsDrawer";
+import { SettingsDrawer } from "./SettingsDrawer";
 import { createRoot } from "react-dom/client";
 import React from "react";
 import "./styles/main.scss";
@@ -10,10 +10,9 @@ import { EventEmitter } from "./EventEmitter";
 export const globalContext = getContext();
 
 // MusicBox context
-export const EventEmitterContext = React.createContext(new EventEmitter());
+export const eventEmitter = new EventEmitter();
 
 function attachReactElement() {  
-  const eventEmitterContext = React.useContext(EventEmitterContext);
   // Choose the root container for the extension's main UI
   const rootContainer = document.getElementById("top-settings-holder");
 
@@ -26,9 +25,7 @@ function attachReactElement() {
 
     root.render(
       <React.StrictMode>
-        <EventEmitterContext.Provider value={eventEmitterContext}>
-          <SettingsDrawer />
-        </EventEmitterContext.Provider>
+          <SettingsDrawer eventEmitter={eventEmitter}/>
       </React.StrictMode>
     );
   }
