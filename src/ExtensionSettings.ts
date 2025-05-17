@@ -5,7 +5,7 @@ import {
   defaultExtensionSettings
 } from "./models/ExtensionSettings";
 
-export function getExtensionSettings() {
+export function getSTExtensionSettings() {
   // @ts-expect-error global extension settings
   if (!extension_settings[defaultExtensionSettings.name]) {
     // @ts-expect-error global extensions settings
@@ -19,9 +19,9 @@ export function getExtensionSettings() {
   return extensionSettingsGlobal;
 }
 
-export function setExtensionSettings(newSettings: unknown) {
-  newSettings = newSettings as IExtenstionSettings;
+export function setSTExtensionSettings(newSettings: IExtenstionSettings) {
   // @ts-expect-error global extensions settings
   extension_settings[defaultExtensionSettings.name] = newSettings;
   saveSettingsDebounced();
+  return newSettings;
 }

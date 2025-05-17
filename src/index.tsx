@@ -1,20 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { getContext } from "@ST/scripts/extensions.js";
-import { SettingsDrawer } from "./SettingsDrawer";
 import { createRoot } from "react-dom/client";
 import React from "react";
 import "./styles/main.scss";
-import { EventEmitter } from "./EventEmitter";
-import { getExtensionSettings, setExtensionSettings } from "./ExtensionSettings";
+import { ExtensionRoot } from "./ExtensionRoot";
 
 // declare var SillyTavern: any;
 export const globalContext = getContext();
-
-// MusicBox context
-export const eventEmitter = new EventEmitter();
-
-
-eventEmitter.on("SETTINGS_UPDATE", setExtensionSettings);
 
 function attachReactElement() {  
   // Choose the root container for the extension's main UI
@@ -29,10 +21,9 @@ function attachReactElement() {
 
     root.render(
       <React.StrictMode>
-          <SettingsDrawer eventEmitter={eventEmitter}/>
+        <ExtensionRoot></ExtensionRoot>
       </React.StrictMode>
     );
-    eventEmitter.emit("SETTINGS_UPDATE", getExtensionSettings);
   }
 }
 

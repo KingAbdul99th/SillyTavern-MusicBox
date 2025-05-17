@@ -2,22 +2,14 @@ import React, { useState } from "react";
 import MusicPlayer from "./components/MusicPlayer";
 import { PlaylistManager } from "./components/PlaylistManager";
 import { defaultPlaylist } from "./models/Playlist";
-import { Callback } from "./EventEmitter";
-import { defaultExtensionSettings, IExtenstionSettings } from "./models/ExtensionSettings";
-import { EventEmitter } from "./EventEmitter";
-
+import { IExtenstionSettings } from "./models/ExtensionSettings";
 
 interface SettingsDrawerProps {
-  eventEmitter: EventEmitter;
+  extensionSettings: IExtenstionSettings;
+  setExtensionSettings: (newSettings: IExtenstionSettings) => void;
 }
 
-export const SettingsDrawer: React.FC<SettingsDrawerProps> = ({eventEmitter}) => {
-  let extensionSettings: IExtenstionSettings = defaultExtensionSettings;
-  const extensionSettingsUpdated: Callback = (eventData: unknown) => {
-    extensionSettings = eventData as IExtenstionSettings;
-  }
-  eventEmitter.on("SETTINGS_UPDATE", extensionSettingsUpdated);
-  const [enabled, setEnabled] = useState(extensionSettings.enabled);
+export const SettingsDrawer: React.FC<SettingsDrawerProps> = ({extensionSettings, setExtensionSettings}) => {
   const [musicVideoId, setMusicVideoId] = useState("Jlv2NxO0qVU");
   const [drawerOpen, setDrawerOpen] = useState(false);
 
@@ -26,14 +18,14 @@ export const SettingsDrawer: React.FC<SettingsDrawerProps> = ({eventEmitter}) =>
       ...extensionSettings,
       enabled: !extensionSettings.enabled
     }
-    eventEmitter.emit("SETTINGS_UPDATE", newSettings)
+    setExtensionSettings(newSettings);
     console.log("enable toggled ", extensionSettings.enabled);
-    setEnabled(extensionSettings.enabled);
   }
 
   function handleDrawerOpenClick() {
     setDrawerOpen(!drawerOpen);
   }
+
   const onVideoIdChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newVideoId = event.target.value;
     setMusicVideoId(newVideoId);
@@ -59,7 +51,7 @@ export const SettingsDrawer: React.FC<SettingsDrawerProps> = ({eventEmitter}) =>
               id="music-box-enable"
               type="checkbox"
               onClick={handleEnabledClick}
-              checked={enabled}
+              checked={extensionSettings.enabled}
             />
             <label htmlFor="music-box-enable">Enable music-box</label>
           </div>
