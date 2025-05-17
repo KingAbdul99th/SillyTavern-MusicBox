@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { getContext } from "@ST/scripts/extensions.js";
-import Settings from "./Settings";
+import Settings from "./SettingsDrawer";
 import { createRoot } from "react-dom/client";
 import React from "react";
 import "./styles/main.scss";
