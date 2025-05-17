@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Playlist } from "../models/Playlist";
 
 
@@ -11,7 +10,9 @@ export const PlaylistManager: React.FC<PlaylistManagerProps> = ({
   playlists,
   selectedPlaylist
 }) => {
+  const listItems = playlists.map(playlist => <option value={playlist.name}>{playlist.name}</option>)
   return <div>
-    <text>{selectedPlaylist}</text>
+    <label htmlFor="musicbox-selected-playlist">{selectedPlaylist}</label>
+    <select id="musicbox-selected-playlist">{listItems}</select>
   </div>;
 };

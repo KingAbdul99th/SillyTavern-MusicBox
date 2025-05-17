@@ -47,11 +47,13 @@ export const DrawerContent: React.FC<DrawerProps> = ({
         value={musicVideoId}
         onChange={onVideoIdChange}
       />
-      <MusicPlayer videoId={musicVideoId} />
-      <PlaylistManager
-        playlists={[defaultPlaylist]}
-        selectedPlaylist={defaultPlaylist.name}
-      />
+      <div style={{display: "flex", flexDirection: "row", gap: "1rem"}}>
+        <MusicPlayer videoId={musicVideoId} />
+        <PlaylistManager
+          playlists={[defaultPlaylist]}
+          selectedPlaylist={defaultPlaylist.name}
+        />
+      </div>
     </div>
   );
 };
