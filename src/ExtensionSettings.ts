@@ -19,9 +19,9 @@ export function getExtensionSettings() {
   return extensionSettingsGlobal;
 }
 
-export function setExtensionSettings(extensionSettings: IExtenstionSettings) {
+export function setExtensionSettings(newSettings: unknown) {
+  newSettings = newSettings as IExtenstionSettings;
   // @ts-expect-error global extensions settings
-  extension_settings[defaultExtensionSettings.name] = extensionSettings;
+  extension_settings[defaultExtensionSettings.name] = newSettings;
   saveSettingsDebounced();
-  return extensionSettings
 }

@@ -5,12 +5,16 @@ import { createRoot } from "react-dom/client";
 import React from "react";
 import "./styles/main.scss";
 import { EventEmitter } from "./EventEmitter";
+import { getExtensionSettings, setExtensionSettings } from "./ExtensionSettings";
 
 // declare var SillyTavern: any;
 export const globalContext = getContext();
 
 // MusicBox context
 export const eventEmitter = new EventEmitter();
+
+
+eventEmitter.on("SETTINGS_UPDATE", setExtensionSettings);
 
 function attachReactElement() {  
   // Choose the root container for the extension's main UI
@@ -28,6 +32,7 @@ function attachReactElement() {
           <SettingsDrawer eventEmitter={eventEmitter}/>
       </React.StrictMode>
     );
+    eventEmitter.emit("SETTINGS_UPDATE", getExtensionSettings);
   }
 }
 
