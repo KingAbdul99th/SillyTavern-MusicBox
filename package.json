@@ -6,6 +6,7 @@
   "main": "src/index.tsx",
   "private": true,
   "dependencies": {
+    "@react-oauth/google": "^0.12.2",
     "@rive-app/react-canvas": "^4.20.1",
     "lucide-react": "^0.510.0",
     "react": "^19.1.0",

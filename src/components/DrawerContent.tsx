@@ -3,7 +3,7 @@ import { PlaylistManager } from "./PlaylistManager";
 import { defaultPlaylist } from "../models/Playlist";
 import { useState } from "react";
 import { IExtenstionSettings } from "../models/ExtensionSettings";
-import { RiveComponent } from "./RiveComponent";
+import { GoogleLogin, GoogleOAuthProvider } from '@react-oauth/google';
 
 interface DrawerProps {
   extensionSettings: IExtenstionSettings;
@@ -15,6 +15,8 @@ export const DrawerContent: React.FC<DrawerProps> = ({
   setExtensionSettings
 }) => {
   const [musicVideoId, setMusicVideoId] = useState("Jlv2NxO0qVU");
+  const [clientId, setClientId] = useState("");
+  const [token, setToken] = useState("");
 
   function handleEnabledClick() {
     const newSettings = {
@@ -25,9 +27,10 @@ export const DrawerContent: React.FC<DrawerProps> = ({
     console.log("enable toggled ", extensionSettings.enabled);
   }
 
-  const onVideoIdChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const newVideoId = event.target.value;
-    setMusicVideoId(newVideoId);
+  const onClientIdChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const newClientId = event.target.value;
+    setClientId(newClientId);
+
   };
 
   return (
@@ -42,12 +45,23 @@ export const DrawerContent: React.FC<DrawerProps> = ({
         <label htmlFor="music-box-enable">Enable music-box</label>
       </div>
       <hr />
-      <input
-        type="text"
-        placeholder="videoId"
-        value={musicVideoId}
-        onChange={onVideoIdChange}
-      />
+      <input type="text" value={clientId} onChange={onClientIdChange}></input>
+      <div style={{display: clientId? "block": "none"}}>
+        <GoogleOAuthProvider clientId={clientId}>
+          <GoogleLogin
+            onSuccess={credentialResponse => {
+              console.log(credentialResponse);
+              if(credentialResponse.credential) {
+                setToken(credentialResponse.credential);
+              }
+            }}
+            onError={() => {
+              console.log('Login Failed');
+            }}
+            useOneTap
+          />;
+        </GoogleOAuthProvider>
+      </div>
       <div style={{display: "flex", flexDirection: "row", gap: "1rem"}}>
         <MusicPlayer videoId={musicVideoId} />
         <PlaylistManager
