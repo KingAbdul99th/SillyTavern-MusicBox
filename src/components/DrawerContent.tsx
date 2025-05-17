@@ -3,6 +3,7 @@ import { PlaylistManager } from "./PlaylistManager";
 import { defaultPlaylist } from "../models/Playlist";
 import { useState } from "react";
 import { IExtenstionSettings } from "../models/ExtensionSettings";
+import { RiveComponent } from "./RiveComponent";
 
 interface DrawerProps {
   extensionSettings: IExtenstionSettings;
@@ -53,6 +54,7 @@ export const DrawerContent: React.FC<DrawerProps> = ({
           playlists={[defaultPlaylist]}
           selectedPlaylist={defaultPlaylist.name}
         />
+          <RiveComponent />
       </div>
     </div>
   );
