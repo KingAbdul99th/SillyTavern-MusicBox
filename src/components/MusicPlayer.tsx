@@ -52,6 +52,10 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ videoId }) => {
     console.log(err);
   };
 
+  const onEnd = () => {
+    console.log("Song play ended");
+  }
+
   const handleVolumeChange = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
       const newVolume = parseFloat(event.target.value);
@@ -108,6 +112,7 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ videoId }) => {
         onReady={onReady}
         onStateChange={onStateChange}
         onError={onError}
+        onEnd={onEnd}
         style={{display: "none"}}
       />
       <div style={styles.controls}>

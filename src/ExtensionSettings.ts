@@ -1,28 +1,6 @@
 import { saveSettingsDebounced } from "@ST/script.js";
 import { extension_settings } from "@ST/scripts/extensions.js";
-
-interface IExtenstionSettings {
-  name: string;
-  enabled: boolean;
-  removeExtras: boolean;
-}
-const defaultExtensionSettings: IExtenstionSettings = {
-  name: "Music Box",
-  enabled: true,
-  removeExtras: true
-};
-
-// export const ExtensionSettingsContext = React.createContext({});
-
-// export function ExtensionSettingsProvider(props: any) {
-//   const [extensionSettings, setExtensionSettings] = React.useState({});
-
-//   return (
-//     <ExtensionSettingsContext.Provider value={{extensionSettings, setExtensionSettings}}>
-//       {...props}
-//     </ExtensionSettingsContext.Provider>
-//   )
-// }
+import { IExtenstionSettings, defaultExtensionSettings } from "./models/ExtensionSettings";
 
 export function getExtensionSettings() {
   // @ts-expect-error global extension settings
