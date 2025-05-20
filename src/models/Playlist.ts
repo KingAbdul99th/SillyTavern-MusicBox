@@ -3,18 +3,13 @@ export interface PlaylistItem {
 }
 
 export interface Playlist {
-  name: string;
-  items: PlaylistItem[];
+  id: string;
+  snippet: { [key: string]: string };
 }
 
 export const defaultPlaylist: Playlist = {
-    name: "default",
-    items: [
-        {
-            "videoId": "Jlv2NxO0qVU",
-        },
-        {
-            "videoId": "o-nq6FiSBSs",
-        }
-    ]
+    id: "default",
+    snippet: {
+      "title": "default"
+    }
 }
