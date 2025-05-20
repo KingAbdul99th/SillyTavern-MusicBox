@@ -1,7 +1,7 @@
 import MusicPlayer from "./MusicPlayer";
 import { PlaylistManager } from "./PlaylistManager";
 import { defaultPlaylist } from "../models/Playlist";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { IExtenstionSettings } from "../models/ExtensionSettings";
 import { GoogleOAuthProvider, useGoogleLogin } from "@react-oauth/google";
 
@@ -42,9 +42,13 @@ async function getAllYoutubePlaylists(token: string) {
 // @ts-expect-error blah
 const LoginButton = ({setToken}) => {
  const login = useGoogleLogin({
-    onSuccess: tokenResponse => setToken(tokenResponse.access_token),
-    flow: "implicit",
-    scope: "https://www.googleapis.com/auth/youtube.readonly"
+    onSuccess: tokenResponse => setToken(tokenResponse.code),
+    onError: err => console.log(err),
+    onNonOAuthError: err => console.log(err),
+    flow: "auth-code",
+    scope: "https://www.googleapis.com/auth/youtube.readonly",
+    ux_mode: "redirect",
+    redirect_uri: "http://localhost:8000/callback/youtube"
   });
   
   return <button onClick={() => login()}>Sign in with Google 🚀</button>
