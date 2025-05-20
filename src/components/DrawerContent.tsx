@@ -4,6 +4,7 @@ import { defaultPlaylist } from "../models/Playlist";
 import { useState } from "react";
 import { IExtenstionSettings } from "../models/ExtensionSettings";
 import { GoogleOAuthProvider, useGoogleLogin } from "@react-oauth/google";
+import { token } from "@ST/script";
 
 
 interface DrawerProps {
@@ -40,7 +41,14 @@ async function getAllYoutubePlaylists(token: string) {
 }
 
 // @ts-expect-error blah
-const LoginButton = ({setToken}) => {
+const LoginButton = ({extensionSettings, setExtensionSettings}) => {
+  const setToken = (res: string) => {
+    const newSettings = {
+      ...extensionSettings,
+      token: res,
+    }
+    setExtensionSettings(newSettings);
+  }
  const login = useGoogleLogin({
     onSuccess: tokenResponse => setToken(tokenResponse.code),
     onError: err => console.log(err),
@@ -51,15 +59,15 @@ const LoginButton = ({setToken}) => {
     redirect_uri: "http://localhost:8000/callback/youtube"
   });
   
-  return <button onClick={() => login()}>Sign in with Google 🚀</button>
+  return <button className="menu_button menu_button_icon interactable" onClick={() => login()}>Sign in with Google 🚀</button>
 }
 
 // @ts-expect-error blah
-const GoogleLogin = ({clientId, setToken}) => {
+const GoogleLogin = ({clientId, extensionSettings, setExtensionSettings}) => {
   return (
     <>
       <GoogleOAuthProvider clientId={clientId}>
-        <LoginButton setToken={setToken} />
+        <LoginButton extensionSettings={extensionSettings} setExtensionSettings={setExtensionSettings}/>
       </GoogleOAuthProvider>
     </>
   )
@@ -70,8 +78,7 @@ export const DrawerContent: React.FC<DrawerProps> = ({
   setExtensionSettings
 }) => {
   const [musicVideoId, setMusicVideoId] = useState("Jlv2NxO0qVU");
-  const [clientId, setClientId] = useState("test");
-  const [token, setToken] = useState("test");
+  const [clientId, setClientId] = useState(extensionSettings.clientId);
   const [playlists, setPlaylists] = useState([]);
 
   const handleEnabledClick = () => {
@@ -94,16 +101,14 @@ export const DrawerContent: React.FC<DrawerProps> = ({
   const onClientIdChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newClientId = event.target.value;
     setClientId(newClientId);
-    console.log("clientId updated ", extensionSettings.clientId);
   };
 
   const onLoadPlaylists = () => {
-    getAllYoutubePlaylists(token).then((data) => {
+    getAllYoutubePlaylists(extensionSettings.token).then((data) => {
       console.log(data);
       setPlaylists(data[0].items);
     });
   };
-
  
   return (
     <>
@@ -117,10 +122,10 @@ export const DrawerContent: React.FC<DrawerProps> = ({
         <label htmlFor="music-box-enable">Enable music-box</label>
       </div>
       <hr />
-      <input type="text" value={clientId} onChange={onClientIdChange}></input>
-      <button onClick={onClientIdSave}>Save ClientId</button>
-      <button onClick={onLoadPlaylists}>Load Playlists</button>
-      <GoogleLogin clientId={clientId} setToken={setToken} />
+      <input className="text_pole" type="text" value={clientId} onChange={onClientIdChange}></input>
+      <button className="menu_button menu_button_icon interactable" onClick={onClientIdSave}>Save ClientId</button>
+      <button className="menu_button menu_button_icon interactable" onClick={onLoadPlaylists}>Load Playlists</button>
+      <GoogleLogin clientId={clientId} extensionSettings={extensionSettings} setExtensionSettings={setExtensionSettings} />
       <div style={{ display: "flex", flexDirection: "row", gap: "1rem" }}>
         <MusicPlayer videoId={musicVideoId} />
         <PlaylistManager
