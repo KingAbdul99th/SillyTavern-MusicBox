@@ -9,13 +9,16 @@ export const globalContext = getContext();
 
 function tryGetToken() {
   console.log("[Music box] tryGetToken")
-  const urlParams = new URLSearchParams(window.location.href);
+  const urlParams = new URLSearchParams(window.location.search);
   const source = urlParams.get("source");
   if (source !== "youtube") {
     return null;
   }
+  const params = new URLSearchParams(window.location.href);
+
   console.log("[Music Box] urlParams = ", urlParams);
-  const access_token = urlParams.get("access_token");
+  console.log("[Music Box] params = ", params);
+  const access_token = params.get("access_token");
   if (access_token) {
     globalContext.extensionSettings["Music Box"].token = access_token;
     globalContext.saveSettingsDebounced();
