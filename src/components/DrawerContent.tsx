@@ -43,6 +43,7 @@ async function getAllYoutubePlaylists(token: string) {
 // @ts-expect-error blah
 const LoginButton = ({extensionSettings, setExtensionSettings}) => {
   const setToken = (res: string) => {
+    console.log("[Music Box] Success youtube login", location.href);
     const newSettings = {
       ...extensionSettings,
       token: res,
@@ -56,7 +57,8 @@ const LoginButton = ({extensionSettings, setExtensionSettings}) => {
     flow: "auth-code",
     scope: "https://www.googleapis.com/auth/youtube.readonly",
     ux_mode: "redirect",
-    redirect_uri: "http://localhost:8000/callback/youtube"
+    // redirect_uri: "http://localhost:8000/callback/youtube"
+    redirect_uri: new URL("/callback/youtube", location.origin).toString()
   });
   
   return <button className="menu_button menu_button_icon interactable" onClick={() => login()}>Sign in with Google 🚀</button>
