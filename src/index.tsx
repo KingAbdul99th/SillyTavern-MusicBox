@@ -5,31 +5,67 @@ import React from "react";
 import "./styles/main.scss";
 import { ExtensionRoot } from "./ExtensionRoot";
 
-// declare var SillyTavern: any;
+declare let toastr: any;
 export const globalContext = getContext();
 
-function attachTokenListner() {
-  globalContext.eventSource.on(globalContext.event_types.APP_READY, () => {
-    console.log("[Music Box] App ready received");
-    const urlParams = new URLSearchParams(window.location.search);
-    const source = urlParams.get('source');
-    if (source !== 'youtube') {
-        return null;
-    }
-    const query = urlParams.get('query');
-    if (query) {
-        const params = new URLSearchParams(query);
-        const code = params.get('code');
-        window.history.replaceState({}, document.title, window.location.pathname);
-        globalContext.extensionSettings["Music Box"].token = code
-        return code;
-    }
+function tryGetCode() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const source = urlParams.get("source");
+  if (source !== "youtube") {
     return null;
-  })
+  }
+  const query = urlParams.get("query");
+  if (query) {
+    const params = new URLSearchParams(query);
+    const code = params.get("code");
+    window.history.replaceState({}, document.title, window.location.pathname);
+    globalContext.extensionSettings["Music Box"].code = code;
+    return code;
+  }
+  return null;
 }
- 
 
-function attachReactElement() {  
+async function tryGetToken() {
+  console.log("[Music Box] Try get token started");
+  const settings = globalContext.extensionSettings["Music Box"];
+  const code = tryGetCode();
+
+  const url = "https://accounts.google.com/o/oauth2/token";
+  const redirectUri = new URL("/callback/youtube", window.location.origin);
+  const payload = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded"
+    },
+    // @ts-expect-error blah
+    body: new URLSearchParams({
+      client_id: settings.clientId,
+      grant_type: "authorization_code",
+      redirect_uri: redirectUri.toString(),
+      code
+    })
+  };
+
+  try {
+    const body = await fetch(url, payload);
+    const token = await body.json();
+
+    settings.token = token;
+    globalContext.saveSettingsDebounced();
+
+    console.log("Spotify token received:", token);
+    toastr.success(`Successfully authenticated with Spotify!`);
+  } catch (error) {
+    console.error("Error during Spotify authentication:", error);
+    toastr.error(`Spotify authentication failed. Please try again.`);
+  }
+}
+
+function attachTokenListner() {
+  globalContext.eventSource.on(globalContext.event_types.APP_READY, tryGetToken);
+}
+
+function attachReactElement() {
   // Choose the root container for the extension's main UI
   const rootContainer = document.getElementById("top-settings-holder");
 
