@@ -8,20 +8,21 @@ import { ExtensionRoot } from "./ExtensionRoot";
 export const globalContext = getContext();
 
 function tryGetToken() {
+  console.log("[Music box] tryGetToken")
   const urlParams = new URLSearchParams(window.location.search);
   const source = urlParams.get("source");
   if (source !== "youtube") {
     return null;
   }
   const query = urlParams.get("query");
+  console.log("[Music Box] query = ", query);
   if (query) {
     const params = new URLSearchParams(query);
+    console.log("[Music Box] params = ", params);
     const token = params.get("access_token");
     window.history.replaceState({}, document.title, window.location.pathname);
     globalContext.extensionSettings["Music Box"].token = token;
-    return token;
   }
-  return null;
 }
 
 function attachTokenListner() {
