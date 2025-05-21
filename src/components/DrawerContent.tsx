@@ -3,8 +3,6 @@ import { PlaylistManager } from "./PlaylistManager";
 import { defaultPlaylist } from "../models/Playlist";
 import { useState } from "react";
 import { IExtenstionSettings } from "../models/ExtensionSettings";
-import { GoogleOAuthProvider, useGoogleLogin } from "@react-oauth/google";
-import { token } from "@ST/script";
 
 
 interface DrawerProps {
@@ -41,37 +39,16 @@ async function getAllYoutubePlaylists(token: string) {
 }
 
 // @ts-expect-error blah
-const LoginButton = ({extensionSettings, setExtensionSettings}) => {
-  const setToken = (res: string) => {
-    console.log("[Music Box] Success youtube login", location.href);
-    const newSettings = {
-      ...extensionSettings,
-      token: res,
-    }
-    setExtensionSettings(newSettings);
-  }
- const login = useGoogleLogin({
-    onSuccess: tokenResponse => setToken(tokenResponse.code),
-    onError: err => console.log(err),
-    onNonOAuthError: err => console.log(err),
-    flow: "auth-code",
-    scope: "https://www.googleapis.com/auth/youtube.readonly",
-    ux_mode: "redirect",
-    redirect_uri: new URL("/callback/youtube", location.origin).toString()
-  });
-  
-  return <button className="menu_button menu_button_icon interactable" onClick={() => login()}>Sign in with Google 🚀</button>
-}
-
-// @ts-expect-error blah
-const GoogleLogin = ({clientId, extensionSettings, setExtensionSettings}) => {
-  return (
-    <>
-      <GoogleOAuthProvider clientId={clientId}>
-        <LoginButton extensionSettings={extensionSettings} setExtensionSettings={setExtensionSettings}/>
-      </GoogleOAuthProvider>
-    </>
-  )
+const LoginButton = ({extensionSettings}) => {
+ const login = (clientId: string) => {
+    const callbackUrl = `${window.location.origin}`;
+    const googleClientId = clientId;
+    const targetUrl = `https://accounts.google.com/o/oauth2/auth?redirect_uri=${encodeURIComponent(
+      callbackUrl
+    )}&response_type=token&client_id=${googleClientId}&scope=openid%20email%20profile`;
+    window.location.href = targetUrl;
+  };
+  return <button className="menu_button menu_button_icon interactable" onClick={() => login(extensionSettings.clientId)}>Sign in with Google 🚀</button>
 }
 
 export const DrawerContent: React.FC<DrawerProps> = ({
@@ -126,7 +103,7 @@ export const DrawerContent: React.FC<DrawerProps> = ({
       <input className="text_pole" type="text" value={clientId} onChange={onClientIdChange}></input>
       <button className="menu_button menu_button_icon interactable" onClick={onClientIdSave}>Save ClientId</button>
       <button className="menu_button menu_button_icon interactable" onClick={onLoadPlaylists}>Load Playlists</button>
-      <GoogleLogin clientId={clientId} extensionSettings={extensionSettings} setExtensionSettings={setExtensionSettings} />
+      <LoginButton extensionSettings={extensionSettings}/>
       <div style={{ display: "flex", flexDirection: "row", gap: "1rem" }}>
         <MusicPlayer videoId={musicVideoId} />
         <PlaylistManager

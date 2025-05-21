@@ -5,10 +5,9 @@ import React from "react";
 import "./styles/main.scss";
 import { ExtensionRoot } from "./ExtensionRoot";
 
-declare let toastr: any;
 export const globalContext = getContext();
 
-function tryGetCode() {
+function tryGetToken() {
   const urlParams = new URLSearchParams(window.location.search);
   const source = urlParams.get("source");
   if (source !== "youtube") {
@@ -17,48 +16,12 @@ function tryGetCode() {
   const query = urlParams.get("query");
   if (query) {
     const params = new URLSearchParams(query);
-    const code = params.get("code");
+    const token = params.get("access_token");
     window.history.replaceState({}, document.title, window.location.pathname);
-    globalContext.extensionSettings["Music Box"].code = code;
-    return code;
+    globalContext.extensionSettings["Music Box"].token = token;
+    return token;
   }
   return null;
-}
-
-async function tryGetToken() {
-  console.log("[Music Box] Try get token started");
-  const settings = globalContext.extensionSettings["Music Box"];
-  const code = tryGetCode();
-
-  const url = "https://accounts.google.com/o/oauth2/token";
-  const redirectUri = new URL("/callback/youtube", window.location.origin);
-  const payload = {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/x-www-form-urlencoded"
-    },
-    // @ts-expect-error blah
-    body: new URLSearchParams({
-      client_id: settings.clientId,
-      grant_type: "authorization_code",
-      redirect_uri: redirectUri.toString(),
-      code
-    })
-  };
-
-  try {
-    const body = await fetch(url, payload);
-    const token = await body.json();
-
-    settings.token = token;
-    globalContext.saveSettingsDebounced();
-
-    console.log("Spotify token received:", token);
-    toastr.success(`Successfully authenticated with Spotify!`);
-  } catch (error) {
-    console.error("Error during Spotify authentication:", error);
-    toastr.error(`Spotify authentication failed. Please try again.`);
-  }
 }
 
 function attachTokenListner() {
