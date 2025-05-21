@@ -15,7 +15,7 @@ function tryGetToken() {
     return null;
   }
   const query = urlParams.get("query");
-  console.log("[Music Box] query = ", query);
+  console.log("[Music Box] urlParams = ", urlParams);
   if (query) {
     const params = new URLSearchParams(query);
     console.log("[Music Box] params = ", params);
