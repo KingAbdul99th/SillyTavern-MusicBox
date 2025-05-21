@@ -41,12 +41,35 @@ async function getAllYoutubePlaylists(token: string) {
 // @ts-expect-error blah
 const LoginButton = ({extensionSettings}) => {
  const login = (clientId: string) => {
-    const callbackUrl = `${window.location.origin}`;
+    const callbackUrl = `${window.location.origin}/callback/youtube`;
     const googleClientId = clientId;
-    const targetUrl = `https://accounts.google.com/o/oauth2/auth?redirect_uri=${encodeURIComponent(
-      callbackUrl
-    )}&response_type=token&client_id=${googleClientId}&scope=openid%20email%20profile`;
-    window.location.href = targetUrl;
+    const targetUrl = "https://accounts.google.com/o/oauth2/v2/auth"
+    const form = document.createElement('form');
+    form.setAttribute('method', 'GET'); // Send as a GET request.
+    form.setAttribute('action', targetUrl);
+
+    // Parameters to pass to OAuth 2.0 endpoint.
+    const params = {'client_id': googleClientId,
+                  'redirect_uri': callbackUrl,
+                  'response_type': 'token',
+                  'scope': 'https://www.googleapis.com/auth/youtube.force-ssl',
+                  'include_granted_scopes': 'true',
+                  'state': 'pass-through value'};
+
+    // Add form parameters as hidden input values.
+    for (const p in params) {
+      const input = document.createElement('input');
+      input.setAttribute('type', 'hidden');
+      input.setAttribute('name', p);
+      // @ts-expect-error blah
+      input.setAttribute('value', params[p]);
+      form.appendChild(input);
+    }
+
+    // Add form to page and submit it to open the OAuth 2.0 endpoint.
+    document.body.appendChild(form);
+    form.submit();
+    // window.location.href = targetUrl;
   };
   return <button className="menu_button menu_button_icon interactable" onClick={() => login(extensionSettings.clientId)}>Sign in with Google 🚀</button>
 }
