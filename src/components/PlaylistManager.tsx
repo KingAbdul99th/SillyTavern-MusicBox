@@ -12,8 +12,6 @@ export const PlaylistManager: React.FC<PlaylistManagerProps> = ({
 }) => {
   let listItems;
   if(Array.isArray(playlists)) {
-    console.log("playlist manager");
-    console.log(playlists);
     listItems = playlists.map(playlist => <option key={playlist.id} value={playlist.snippet["title"]}>{playlist.snippet["title"]}</option>)
   }
   return <div>

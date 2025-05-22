@@ -1,37 +1,10 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import { getContext } from "@ST/scripts/extensions.js";
 import { createRoot } from "react-dom/client";
 import React from "react";
 import "./styles/main.scss";
 import { ExtensionRoot } from "./ExtensionRoot";
-
-export const globalContext = getContext();
-
-function tryGetToken() {
-  console.log("[Music box] tryGetToken")
-  const urlParams = new URLSearchParams(window.location.search);
-  const source = urlParams.get("source");
-  if (source !== "youtube") {
-    return null;
-  }
-  const params = new URLSearchParams(window.location.href);
-
-  console.log("[Music Box] urlParams = ", urlParams);
-  console.log("[Music Box] params = ", params);
-  const access_token = params.get("access_token");
-  if (access_token) {
-    globalContext.extensionSettings["Music Box"].token = access_token;
-    globalContext.saveSettingsDebounced();
-    window.history.replaceState({}, document.title, window.location.pathname);
-  }
-}
-
-function attachTokenListner() {
-  globalContext.eventSource.on(globalContext.event_types.APP_READY, tryGetToken);
-}
+import { logger } from "./utils/logger";
 
 function attachReactElement() {
-  // Choose the root container for the extension's main UI
   const rootContainer = document.getElementById("top-settings-holder");
 
   if (rootContainer) {
@@ -50,10 +23,9 @@ function attachReactElement() {
 }
 
 function main() {
-  console.log("[music-box] Initialization Started");
+  logger.info("Initialization Started");
   attachReactElement();
-  attachTokenListner();
-  console.log("[music-box] Initialization Finished");
+  logger.info("Initialization Ended");
 }
 
 main();

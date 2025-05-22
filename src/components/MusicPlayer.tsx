@@ -5,12 +5,13 @@ import YouTube, {
   YouTubePlayer,
   YouTubeProps
 } from "react-youtube";
+import { logger } from "../utils/logger";
 
 interface MusicPlayerProps {
   videoId: string;
 }
 
-const MusicPlayer: React.FC<MusicPlayerProps> = ({ videoId }) => {
+export const MusicPlayer: React.FC<MusicPlayerProps> = ({ videoId }) => {
   const [player, setPlayer] = useState<YouTubePlayer | null>(null);
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
   const [currentTime, setCurrentTime] = useState<number>(0);
@@ -49,11 +50,11 @@ const MusicPlayer: React.FC<MusicPlayerProps> = ({ videoId }) => {
   );
 
   const onError = (err: YouTubeEvent<number>) => {
-    console.log(err);
+    logger.error(err);
   };
 
   const onEnd = () => {
-    console.log("Song play ended");
+    logger.info("Song play ended");
   }
 
   const handleVolumeChange = useCallback(
@@ -241,5 +242,3 @@ const styles = {
     width: "10rem"
   }
 };
-
-export default MusicPlayer;
