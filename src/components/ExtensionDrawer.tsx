@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { IExtenstionSettings } from "./models/ExtensionSettings";
-import { DrawerContent } from "./components/DrawerContent";
+import { IExtenstionSettings } from "@/models/ExtensionSettings";
+import { DrawerContent } from "@/components/DrawerContent";
 
 interface ExtensionDrawerProps {
   extensionSettings: IExtenstionSettings;
@@ -13,11 +13,9 @@ export const ExtensionDrawer: React.FC<ExtensionDrawerProps> = ({
 }) => {
   const [drawerOpen, setDrawerOpen] = useState(false);
 
-
   function handleDrawerOpenClick() {
     setDrawerOpen(!drawerOpen);
   }
-
 
   return (
     <>

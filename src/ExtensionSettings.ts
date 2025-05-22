@@ -3,7 +3,7 @@ import { extension_settings } from "@ST/scripts/extensions.js";
 import {
   IExtenstionSettings,
   defaultExtensionSettings
-} from "./models/ExtensionSettings";
+} from "@/models/ExtensionSettings";
 
 export function getSTExtensionSettings() {
   // @ts-expect-error global extension settings

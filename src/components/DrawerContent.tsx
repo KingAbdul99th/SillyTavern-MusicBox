@@ -1,10 +1,10 @@
-import { MusicPlayer } from "./MusicPlayer";
-import { PlaylistManager } from "./PlaylistManager";
-import { defaultPlaylist } from "../models/Playlist";
+import { MusicPlayer } from "@/components/MusicPlayer";
+import { PlaylistManager } from "@/components/PlaylistManager";
+import { defaultPlaylist } from "@/models/Playlist";
 import { useState } from "react";
-import { IExtenstionSettings } from "../models/ExtensionSettings";
-import { LoginButton } from "./Auth";
-import { logger } from "../utils/logger";
+import { IExtenstionSettings } from "@/models/ExtensionSettings";
+import { LoginButton } from "@/components/Auth";
+import { logger } from "@/utils/logger";
 
 interface DrawerProps {
   extensionSettings: IExtenstionSettings;

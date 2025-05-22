@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "description": "",
   "type": "module",
-  "main": "src/index.tsx",
+  "main": "src/index.ts",
   "private": true,
   "dependencies": {
     "@react-oauth/google": "^0.12.2",

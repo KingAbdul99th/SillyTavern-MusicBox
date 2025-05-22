@@ -10,7 +10,8 @@
         "paths": {
             "@ST/*": [
                 "./types/ST/*"
-            ]
+            ],
+            "@/*": ["./src/*"]
         },
         "allowSyntheticDefaultImports": true,
         "forceConsistentCasingInFileNames": true,

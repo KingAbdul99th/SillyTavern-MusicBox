@@ -5,7 +5,7 @@ import YouTube, {
   YouTubePlayer,
   YouTubeProps
 } from "react-youtube";
-import { logger } from "../utils/logger";
+import { logger } from "@/utils/logger";
 
 interface MusicPlayerProps {
   videoId: string;

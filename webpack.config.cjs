@@ -5,7 +5,7 @@ const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = {
     mode: process.env.NODE_ENV === 'production' ? 'production' : 'development',
-    entry: path.join(__dirname, 'src/index.tsx'),
+    entry: path.join(__dirname, 'src/index.ts'),
     output: {
         path: path.join(__dirname, 'dist/'),
         filename: 'index.js',
@@ -30,6 +30,9 @@ module.exports = {
         extensions: ['.ts', '.tsx', '.js', '.jsx'],
         extensionAlias: {
             '.js': ['.ts', '.js', ".tsx", ".jsx"],
+        },
+        alias: {
+            "@": path.resolve(__dirname, 'src'),
         }
     },
     devtool: process.env.NODE_ENV === 'production' ? false : 'source-map',

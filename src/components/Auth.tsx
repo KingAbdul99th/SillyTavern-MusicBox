@@ -1,4 +1,4 @@
-import { IExtenstionSettings } from "../models/ExtensionSettings";
+import { IExtenstionSettings } from "@/models/ExtensionSettings";
 import { getContext } from "@ST/scripts/extensions.js";
 
 const globalContext = getContext();
