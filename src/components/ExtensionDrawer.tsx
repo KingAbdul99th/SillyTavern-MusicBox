@@ -41,6 +41,7 @@ export const ExtensionDrawer: React.FC<ExtensionDrawerProps> = ({
         <div className="drawer-icon fa-solid fa-music fa-fw closedIcon sttt--enabled interactable"></div>
       </div>
       <div
+        id="music-box-drawer-content"
         className={
           "drawer-content " + (drawerOpen ? "openDrawer" : "closedDrawer")
         }
