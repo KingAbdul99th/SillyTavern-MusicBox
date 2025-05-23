@@ -19,7 +19,7 @@ export const PlaylistManager: React.FC<PlaylistManagerProps> = ({
   }
   return (
     <div>
-      <label htmlFor="musicbox-selected-playlist">{selectedPlaylist}</label>
+      <label htmlFor="musicbox-selected-playlist">Selected playlist:</label>
       <select id="musicbox-selected-playlist" style={{ width: "200px" }}>
         {listItems}
       </select>
