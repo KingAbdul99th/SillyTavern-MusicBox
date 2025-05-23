@@ -21,6 +21,7 @@ export const ExtensionDrawer: React.FC<ExtensionDrawerProps> = ({
     <>
       <div
         className="drawer-toggle drawer-header"
+        data-slide-toggle="hidden"
         onClick={handleDrawerOpenClick}
       >
         <div className="drawer-icon fa-solid fa-music fa-fw closedIcon sttt--enabled interactable"></div>
