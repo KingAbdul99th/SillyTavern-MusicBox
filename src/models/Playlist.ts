@@ -2,12 +2,12 @@ export interface PlaylistItem {
   videoId: string;
 }
 
-export interface Playlist {
+export interface IPlaylist {
   id: string;
   snippet: { [key: string]: string };
 }
 
-export const defaultPlaylist: Playlist = {
+export const defaultPlaylist: IPlaylist = {
   id: "default",
   snippet: {
     title: "default"

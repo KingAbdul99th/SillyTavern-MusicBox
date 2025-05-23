@@ -73,7 +73,8 @@ export const DrawerContent: React.FC<DrawerProps> = ({
 
   const onLoadPlaylists = () => {
     getAllYoutubePlaylists(extensionSettings.token).then((data) => {
-      setPlaylists(data[0].items);
+      // @ts-expect-error untyped response
+      setPlaylists(data.flatMap(x => x.items));
     });
   };
 

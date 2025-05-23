@@ -1,7 +1,7 @@
-import { Playlist } from "@/models/Playlist";
+import { IPlaylist } from "@/models/Playlist";
 
 interface PlaylistManagerProps {
-  playlists: Playlist[];
+  playlists: IPlaylist[];
   selectedPlaylist: string;
 }
 
