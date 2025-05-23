@@ -14,8 +14,10 @@ interface DrawerProps {
 
 async function getYoutubePlaylists(token: string, pageToken: string | null) {
   let url =
-    "https://www.googleapis.com/youtube/v3/playlists?part=snippet,contentDetails&mine=true" +
-    "&maxResults=100" +
+    "https://www.googleapis.com/youtube/v3/playlists?" +
+    "part=snippet,player" +
+    "&mine=true" +
+    "&maxResults=50" +
     "&access_token=" +
     token;
   if (pageToken) {
@@ -74,7 +76,7 @@ export const DrawerContent: React.FC<DrawerProps> = ({
   const onLoadPlaylists = () => {
     getAllYoutubePlaylists(extensionSettings.token).then((data) => {
       // @ts-expect-error untyped response
-      setPlaylists(data.flatMap(x => x.items));
+      setPlaylists(data.flatMap((x) => x.items));
     });
   };
 
