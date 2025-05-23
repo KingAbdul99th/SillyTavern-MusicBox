@@ -5,6 +5,7 @@ import { useState } from "react";
 import { IExtenstionSettings } from "@/models/ExtensionSettings";
 import { LoginButton } from "@/components/Auth";
 import { logger } from "@/utils/logger";
+import { CONSTS } from "@/utils/consts";
 
 interface DrawerProps {
   extensionSettings: IExtenstionSettings;
@@ -85,7 +86,7 @@ export const DrawerContent: React.FC<DrawerProps> = ({
           onClick={handleEnabledClick}
           checked={extensionSettings.enabled}
         />
-        <label htmlFor="music-box-enable">Enable music-box</label>
+        <label htmlFor="music-box-enable">Enable {CONSTS.extensionName}</label>
       </div>
       <hr />
       <input
@@ -94,19 +95,21 @@ export const DrawerContent: React.FC<DrawerProps> = ({
         value={clientId}
         onChange={onClientIdChange}
       ></input>
-      <button
-        className="menu_button menu_button_icon interactable"
-        onClick={onClientIdSave}
-      >
-        Save ClientId
-      </button>
-      <LoginButton extensionSettings={extensionSettings} />
-      <button
-        className="menu_button menu_button_icon interactable"
-        onClick={onLoadPlaylists}
-      >
-        Load Playlists
-      </button>
+      <div className="flex-container">
+        <button
+          className="menu_button menu_button_icon interactable"
+          onClick={onClientIdSave}
+        >
+          Save ClientId
+        </button>
+        <LoginButton extensionSettings={extensionSettings} />
+        <button
+          className="menu_button menu_button_icon interactable"
+          onClick={onLoadPlaylists}
+        >
+          Load Playlists
+        </button>
+      </div>
       <div style={{ display: "flex", flexDirection: "row", gap: "1rem" }}>
         <MusicPlayer videoId={videoId} />
         <PlaylistManager
