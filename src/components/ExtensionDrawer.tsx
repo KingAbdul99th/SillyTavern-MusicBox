@@ -1,10 +1,21 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { IExtenstionSettings } from "@/models/ExtensionSettings";
 import { DrawerContent } from "@/components/DrawerContent";
 
 interface ExtensionDrawerProps {
   extensionSettings: IExtenstionSettings;
   setExtensionSettings: (newSettings: IExtenstionSettings) => void;
+}
+
+function clickHandlerHack() {
+  // @ts-expect-error: Hack to suppress IDE errors due to SillyTavern's
+  //             weird mix of imports and globally defined objects.
+  const $ = window.$;
+
+  const element = document.querySelector("#extensions-settings-button .drawer-toggle");
+  const events = $._data(element, "events");
+  const doNavbarIconClick = events.click[0].handler;
+  $("#music-box-button .drawer-toggle").on("click", doNavbarIconClick);
 }
 
 export const ExtensionDrawer: React.FC<ExtensionDrawerProps> = ({
@@ -17,9 +28,13 @@ export const ExtensionDrawer: React.FC<ExtensionDrawerProps> = ({
     setDrawerOpen(!drawerOpen);
   }
 
+  useEffect(() => {
+    clickHandlerHack()
+  }, []);
   return (
     <>
       <div
+        id="music-box-button"
         className="drawer-toggle drawer-header"
         data-slide-toggle="hidden"
         onClick={handleDrawerOpenClick}

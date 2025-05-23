@@ -20,9 +20,11 @@ async function getYoutubePlaylists(token: string, pageToken: string | null) {
     "&maxResults=50" +
     "&access_token=" +
     token;
+
   if (pageToken) {
     url = url + "&pageToken=" + pageToken;
   }
+
   const response = await fetch(url, {
     headers: new Headers({
       Accept: "application/json"
