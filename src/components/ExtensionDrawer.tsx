@@ -8,6 +8,7 @@ interface ExtensionDrawerProps {
 }
 
 function clickHandlerHack() {
+  // Sourced from ST-Sorcery
   // @ts-expect-error: Hack to suppress IDE errors due to SillyTavern's
   //             weird mix of imports and globally defined objects.
   const $ = window.$;
@@ -41,11 +42,9 @@ export const ExtensionDrawer: React.FC<ExtensionDrawerProps> = ({
         <div className="drawer-icon fa-solid fa-music fa-fw closedIcon sttt--enabled interactable"></div>
       </div>
       <div
-        id="music-box-drawer-content"
         className={
           "drawer-content " + (drawerOpen ? "openDrawer" : "closedDrawer")
         }
-        style={{ display: drawerOpen ? "block" : "none" }}
       >
         <DrawerContent
           extensionSettings={extensionSettings}
