@@ -1,6 +1,9 @@
 import { createRoot } from "react-dom/client";
-import { ExtensionDrawer } from "@/components/ExtensionDrawer"
-import { getSTExtensionSettings, setSTExtensionSettings } from "../ExtensionSettings";
+import { ExtensionDrawer } from "@/components/ExtensionDrawer";
+import {
+  getSTExtensionSettings,
+  setSTExtensionSettings
+} from "../ExtensionSettings";
 import { useEffect, useState } from "react";
 import React from "react";
 
@@ -23,13 +26,18 @@ export function attachReactElement() {
 }
 
 const ExtensionRoot = () => {
-  const [extensionSettings, setExtensionSettings] = useState(getSTExtensionSettings());
+  const [extensionSettings, setExtensionSettings] = useState(
+    getSTExtensionSettings()
+  );
 
   useEffect(() => {
-    setSTExtensionSettings(extensionSettings)
+    setSTExtensionSettings(extensionSettings);
   }, [extensionSettings]);
 
-    return (
-        <ExtensionDrawer extensionSettings={extensionSettings} setExtensionSettings={setExtensionSettings}/>
-    )
-}
+  return (
+    <ExtensionDrawer
+      extensionSettings={extensionSettings}
+      setExtensionSettings={setExtensionSettings}
+    />
+  );
+};

@@ -2,7 +2,7 @@ import Rive, { Alignment, Fit, Layout } from "@rive-app/react-canvas";
 
 export const RiveComponent = () => {
   return (
-    <div style={{width: "100%"}}>
+    <div style={{ width: "100%" }}>
       <Rive
         src="https://cdn.rive.app/animations/vehicles.riv"
         stateMachines="bumpy"

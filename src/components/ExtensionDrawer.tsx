@@ -32,7 +32,10 @@ export const ExtensionDrawer: React.FC<ExtensionDrawerProps> = ({
           }
           style={{ display: drawerOpen ? "block" : "none" }}
         >
-          <DrawerContent extensionSettings={extensionSettings} setExtensionSettings={setExtensionSettings}></DrawerContent>
+          <DrawerContent
+            extensionSettings={extensionSettings}
+            setExtensionSettings={setExtensionSettings}
+          ></DrawerContent>
         </div>
       </div>
     </>

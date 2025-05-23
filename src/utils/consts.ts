@@ -1,4 +1,3 @@
-
 export const CONSTS = {
-    extensionName: "Music Box",
-}
+  extensionName: "Music Box"
+};

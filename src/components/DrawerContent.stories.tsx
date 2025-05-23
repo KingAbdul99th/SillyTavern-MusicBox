@@ -1,10 +1,10 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from "@storybook/react";
 
-import { DrawerContent } from './DrawerContent';
-import { defaultExtensionSettings } from '../models/ExtensionSettings';
+import { DrawerContent } from "./DrawerContent";
+import { defaultExtensionSettings } from "../models/ExtensionSettings";
 
 const meta = {
-  component: DrawerContent,
+  component: DrawerContent
 } satisfies Meta<typeof DrawerContent>;
 
 export default meta;

@@ -1,4 +1,3 @@
-
 export interface IExtenstionSettings {
   name: string;
   enabled: boolean;
@@ -16,5 +15,5 @@ export const defaultExtensionSettings: IExtenstionSettings = {
 };
 
 export const extensionSettingsEventTypes = {
-    UPDATE: "MUSICBOX_SETTINGS_UPDATE"
-}
+  UPDATE: "MUSICBOX_SETTINGS_UPDATE"
+};

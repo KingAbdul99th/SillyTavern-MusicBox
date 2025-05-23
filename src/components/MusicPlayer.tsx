@@ -55,7 +55,7 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = ({ videoId }) => {
 
   const onEnd = () => {
     logger.info("Song play ended");
-  }
+  };
 
   const handleVolumeChange = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -114,7 +114,7 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = ({ videoId }) => {
         onStateChange={onStateChange}
         onError={onError}
         onEnd={onEnd}
-        style={{display: "none"}}
+        style={{ display: "none" }}
       />
       <div style={styles.controls}>
         <button
@@ -140,7 +140,9 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = ({ videoId }) => {
           />
           <div style={styles.timeDisplay}>
             <span>{formatTime(currentTime)}</span>
-            <span style={{textAlign: "right", marginLeft: "auto"}}>{formatTime(duration)}</span>
+            <span style={{ textAlign: "right", marginLeft: "auto" }}>
+              {formatTime(duration)}
+            </span>
           </div>
         </div>
         <button
@@ -188,7 +190,7 @@ const styles = {
     display: "flex",
     alignItems: "center",
     width: "100%",
-    gap: "1rem",
+    gap: "1rem"
   },
   playPauseButton: {
     width: "3rem",

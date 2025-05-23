@@ -15,8 +15,9 @@ async function getYoutubePlaylists(token: string, pageToken: string | null) {
   let url =
     "https://www.googleapis.com/youtube/v3/playlists?part=snippet,contentDetails&mine=true" +
     "&maxResults=100" +
-    "&access_token=" + token;
-  if(pageToken) {
+    "&access_token=" +
+    token;
+  if (pageToken) {
     url = url + "&pageToken=" + pageToken;
   }
   const response = await fetch(url, {
@@ -31,14 +32,13 @@ async function getAllYoutubePlaylists(token: string) {
   const pages = [];
   let nextPage = await getYoutubePlaylists(token, null);
   pages.push(nextPage);
-  while(nextPage["nextPageToken"]) {
-    nextPage = await getYoutubePlaylists(token, nextPage["nextPageToken"])
+  while (nextPage["nextPageToken"]) {
+    nextPage = await getYoutubePlaylists(token, nextPage["nextPageToken"]);
     pages.push(nextPage);
   }
-  logger.debug("Received playlists", pages)
+  logger.debug("Received playlists", pages);
   return pages;
 }
-
 
 export const DrawerContent: React.FC<DrawerProps> = ({
   extensionSettings,
@@ -54,7 +54,7 @@ export const DrawerContent: React.FC<DrawerProps> = ({
       enabled: !extensionSettings.enabled
     };
     setExtensionSettings(newSettings);
-    logger.info("Enabled toggled", extensionSettings.enabled)
+    logger.info("Enabled toggled", extensionSettings.enabled);
   };
 
   const onClientIdSave = () => {
@@ -75,7 +75,7 @@ export const DrawerContent: React.FC<DrawerProps> = ({
       setPlaylists(data[0].items);
     });
   };
- 
+
   return (
     <>
       <div style={{ display: "flex", gap: "5px", flexWrap: "wrap" }}>
@@ -88,10 +88,25 @@ export const DrawerContent: React.FC<DrawerProps> = ({
         <label htmlFor="music-box-enable">Enable music-box</label>
       </div>
       <hr />
-      <input className="text_pole" type="text" value={clientId} onChange={onClientIdChange}></input>
-      <button className="menu_button menu_button_icon interactable" onClick={onClientIdSave}>Save ClientId</button>
-      <LoginButton extensionSettings={extensionSettings}/>
-      <button className="menu_button menu_button_icon interactable" onClick={onLoadPlaylists}>Load Playlists</button>
+      <input
+        className="text_pole"
+        type="text"
+        value={clientId}
+        onChange={onClientIdChange}
+      ></input>
+      <button
+        className="menu_button menu_button_icon interactable"
+        onClick={onClientIdSave}
+      >
+        Save ClientId
+      </button>
+      <LoginButton extensionSettings={extensionSettings} />
+      <button
+        className="menu_button menu_button_icon interactable"
+        onClick={onLoadPlaylists}
+      >
+        Load Playlists
+      </button>
       <div style={{ display: "flex", flexDirection: "row", gap: "1rem" }}>
         <MusicPlayer videoId={videoId} />
         <PlaylistManager

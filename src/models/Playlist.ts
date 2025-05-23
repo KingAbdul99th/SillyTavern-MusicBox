@@ -8,8 +8,8 @@ export interface Playlist {
 }
 
 export const defaultPlaylist: Playlist = {
-    id: "default",
-    snippet: {
-      "title": "default"
-    }
-}
+  id: "default",
+  snippet: {
+    title: "default"
+  }
+};
