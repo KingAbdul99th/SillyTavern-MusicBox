@@ -15,7 +15,7 @@ function clickHandlerHack() {
   const element = document.querySelector("#extensions-settings-button .drawer-toggle");
   const events = $._data(element, "events");
   const doNavbarIconClick = events.click[0].handler;
-  $("#music-box-button .drawer-toggle").on("click", doNavbarIconClick);
+  $("#music-box-extension-container .drawer-toggle").on("click", doNavbarIconClick);
 }
 
 export const ExtensionDrawer: React.FC<ExtensionDrawerProps> = ({
@@ -34,7 +34,6 @@ export const ExtensionDrawer: React.FC<ExtensionDrawerProps> = ({
   return (
     <>
       <div
-        id="music-box-button"
         className="drawer-toggle drawer-header"
         data-slide-toggle="hidden"
         onClick={handleDrawerOpenClick}
