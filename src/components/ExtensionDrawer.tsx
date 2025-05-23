@@ -19,24 +19,22 @@ export const ExtensionDrawer: React.FC<ExtensionDrawerProps> = ({
 
   return (
     <>
-      <div className="drawer">
-        <div
-          className="drawer-toggle drawer-header"
-          onClick={handleDrawerOpenClick}
-        >
-          <div className="drawer-icon fa-solid fa-music fa-fw closedIcon sttt--enabled interactable"></div>
-        </div>
-        <div
-          className={
-            "drawer-content " + (drawerOpen ? "openDrawer" : "closedDrawer")
-          }
-          style={{ display: drawerOpen ? "block" : "none" }}
-        >
-          <DrawerContent
-            extensionSettings={extensionSettings}
-            setExtensionSettings={setExtensionSettings}
-          ></DrawerContent>
-        </div>
+      <div
+        className="drawer-toggle drawer-header"
+        onClick={handleDrawerOpenClick}
+      >
+        <div className="drawer-icon fa-solid fa-music fa-fw closedIcon sttt--enabled interactable"></div>
+      </div>
+      <div
+        className={
+          "drawer-content " + (drawerOpen ? "openDrawer" : "closedDrawer")
+        }
+        style={{ display: drawerOpen ? "block" : "none" }}
+      >
+        <DrawerContent
+          extensionSettings={extensionSettings}
+          setExtensionSettings={setExtensionSettings}
+        ></DrawerContent>
       </div>
     </>
   );
