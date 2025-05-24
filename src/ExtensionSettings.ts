@@ -4,6 +4,9 @@ import {
   IExtenstionSettings,
   defaultExtensionSettings
 } from "@/models/ExtensionSettings";
+import { getContext } from "@ST/scripts/extensions.js";
+
+const globalContext = getContext();
 
 export function getSTExtensionSettings() {
   // @ts-expect-error global extension settings
@@ -24,4 +27,31 @@ export function setSTExtensionSettings(newSettings: IExtenstionSettings) {
   extension_settings[defaultExtensionSettings.name] = newSettings;
   saveSettingsDebounced();
   return newSettings;
+}
+
+function tryGetToken() {
+  // https://developers.google.com/youtube/v3/guides/auth/client-side-web-apps#redirecting
+  console.log("[Music box] tryGetToken");
+  const urlParams = new URLSearchParams(window.location.search);
+  const source = urlParams.get("source");
+  if (source !== "youtube") {
+    return null;
+  }
+  const params = new URLSearchParams(window.location.href);
+
+  console.log("[Music Box] urlParams = ", urlParams);
+  console.log("[Music Box] params = ", params);
+  const access_token = params.get("access_token");
+  if (access_token) {
+    globalContext.extensionSettings["Music Box"].token = access_token;
+    globalContext.saveSettingsDebounced();
+    window.history.replaceState({}, document.title, window.location.pathname);
+  }
+}
+
+export function attachTokenListner() {
+  globalContext.eventSource.on(
+    globalContext.event_types.APP_READY,
+    tryGetToken
+  );
 }

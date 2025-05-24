@@ -1,38 +1,9 @@
 import { IExtenstionSettings } from "@/models/ExtensionSettings";
-import { getContext } from "@ST/scripts/extensions.js";
-
-const globalContext = getContext();
 
 interface ILoginButtonProps {
   extensionSettings: IExtenstionSettings;
 }
 
-function tryGetToken() {
-  // https://developers.google.com/youtube/v3/guides/auth/client-side-web-apps#redirecting
-  console.log("[Music box] tryGetToken");
-  const urlParams = new URLSearchParams(window.location.search);
-  const source = urlParams.get("source");
-  if (source !== "youtube") {
-    return null;
-  }
-  const params = new URLSearchParams(window.location.href);
-
-  console.log("[Music Box] urlParams = ", urlParams);
-  console.log("[Music Box] params = ", params);
-  const access_token = params.get("access_token");
-  if (access_token) {
-    globalContext.extensionSettings["Music Box"].token = access_token;
-    globalContext.saveSettingsDebounced();
-    window.history.replaceState({}, document.title, window.location.pathname);
-  }
-}
-
-function attachTokenListner() {
-  globalContext.eventSource.on(
-    globalContext.event_types.APP_READY,
-    tryGetToken
-  );
-}
 
 export const LoginButton: React.FC<ILoginButtonProps> = ({
   extensionSettings
@@ -69,7 +40,6 @@ export const LoginButton: React.FC<ILoginButtonProps> = ({
     document.body.appendChild(form);
     form.submit();
   };
-  attachTokenListner();
   return (
     <button
       className="menu_button menu_button_icon interactable"

@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { PlaylistManager } from "./PlaylistManager";
-import { defaultPlaylist } from "../models/Playlist";
+import { PlaylistManager } from "@/components/PlaylistManager";
+import { defaultPlaylist } from "@/models/Playlist";
 
 const meta = {
   component: PlaylistManager
