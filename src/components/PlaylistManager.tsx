@@ -12,7 +12,7 @@ export const PlaylistManager: React.FC<PlaylistManagerProps> = ({
   let listItems;
   if (Array.isArray(playlists)) {
     listItems = playlists.map((playlist) => (
-      <option key={playlist.id} value={playlist.snippet["title"]}>
+      <option key={playlist.id} value={playlist.snippet["title"]} >
         {playlist.snippet["title"]}
       </option>
     ));
@@ -20,7 +20,7 @@ export const PlaylistManager: React.FC<PlaylistManagerProps> = ({
   return (
     <div>
       <label htmlFor="musicbox-selected-playlist">Selected playlist:</label>
-      <select id="musicbox-selected-playlist" style={{ width: "200px" }}>
+      <select id="musicbox-selected-playlist" style={{ width: "200px" }} value={selectedPlaylist}>
         {listItems}
       </select>
     </div>

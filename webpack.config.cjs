@@ -2,6 +2,7 @@
 /* eslint-disable no-undef */
 const path = require("path");
 const TerserPlugin = require("terser-webpack-plugin");
+const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 
 module.exports = {
   mode: process.env.NODE_ENV === "production" ? "production" : "development",
@@ -33,7 +34,8 @@ module.exports = {
     },
     alias: {
       "@": path.resolve(__dirname, "src")
-    }
+    },
+    plugins: [new TsconfigPathsPlugin()]
   },
   devtool: process.env.NODE_ENV === "production" ? false : "source-map",
   module: {
