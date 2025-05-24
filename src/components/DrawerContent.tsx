@@ -6,43 +6,11 @@ import { IExtenstionSettings } from "@/models/ExtensionSettings";
 import { LoginButton } from "@/components/Auth";
 import { logger } from "@/utils/logger";
 import { CONSTS } from "@/utils/consts";
+import { getPlaylists } from "@/providers/youtube";
 
 interface DrawerProps {
   extensionSettings: IExtenstionSettings;
   setExtensionSettings: (newSettings: IExtenstionSettings) => void;
-}
-
-async function getYoutubePlaylists(token: string, pageToken: string | null) {
-  let url =
-    "https://www.googleapis.com/youtube/v3/playlists?" +
-    "part=snippet,player" +
-    "&mine=true" +
-    "&maxResults=50" +
-    "&access_token=" +
-    token;
-
-  if (pageToken) {
-    url = url + "&pageToken=" + pageToken;
-  }
-
-  const response = await fetch(url, {
-    headers: new Headers({
-      Accept: "application/json"
-    })
-  });
-  return response.json();
-}
-
-async function getAllYoutubePlaylists(token: string) {
-  const pages = [];
-  let nextPage = await getYoutubePlaylists(token, null);
-  pages.push(nextPage);
-  while (nextPage["nextPageToken"]) {
-    nextPage = await getYoutubePlaylists(token, nextPage["nextPageToken"]);
-    pages.push(nextPage);
-  }
-  logger.debug("Received playlists", pages);
-  return pages;
 }
 
 export const DrawerContent: React.FC<DrawerProps> = ({
@@ -76,7 +44,7 @@ export const DrawerContent: React.FC<DrawerProps> = ({
   };
 
   const onLoadPlaylists = () => {
-    getAllYoutubePlaylists(extensionSettings.token).then((data) => {
+    getPlaylists(extensionSettings.token).then((data) => {
       // @ts-expect-error untyped response
       setPlaylists(data.flatMap((x) => x.items));
     });
