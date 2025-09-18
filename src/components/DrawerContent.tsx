@@ -1,7 +1,7 @@
 import { MusicPlayer } from "@/components/MusicPlayer";
 import { PlaylistManager } from "@/components/PlaylistManager";
 import { defaultPlaylist } from "@/models/Playlist";
-import { useState } from "react";
+import React, { useState } from "react";
 import { IExtenstionSettings } from "@/models/ExtensionSettings";
 import { LoginButton } from "@/components/Auth";
 import { logger } from "@/utils/logger";
@@ -11,6 +11,18 @@ import { getPlaylists } from "@/providers/youtube";
 interface DrawerProps {
   extensionSettings: IExtenstionSettings;
   setExtensionSettings: (newSettings: IExtenstionSettings) => void;
+}
+
+
+const SourceList: React.FC = () => {
+  return <>
+      Music Source
+      <select id="musicbox-selected-source" style={{ width: "200px" }} value="local">
+        <option>local</option>
+        <option>youtube</option>
+        <option>spotify</option>
+      </select>
+    </>
 }
 
 export const DrawerContent: React.FC<DrawerProps> = ({
@@ -60,6 +72,7 @@ export const DrawerContent: React.FC<DrawerProps> = ({
           checked={extensionSettings.enabled}
         />
         <label htmlFor="music-box-enable">Enable {CONSTS.extensionName}</label>
+        <SourceList></SourceList>
       </div>
       <hr />
       <input
